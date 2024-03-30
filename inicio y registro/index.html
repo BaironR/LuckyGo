@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuckyGo-Iniciar Sesion</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container {
+            position: relative;
+        }
+
+        .login-button,
+        .register-button { /* Aplicar estilos a ambos botones */
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+            .login-button:hover,
+            .register-button:hover { /* Estilos al pasar el mouse */
+                background-color: #2ECC71;
+            }
+
+        .register-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="register-button" onclick="window.location.href='registrar.html'">Registrarse</button> <!-- Botón Registrarse -->
+        <div class="main">
+            <input type="checkbox" id="chk" aria-hidden="true">
+            <div class="login">
+                <form class="form">
+                    <label for="chk" aria-hidden="true">Iniciar Sesion</label>
+                    <img src="lucky6.PNG" alt="Imagen de inicio de sesión" style="width: 200px; height: 119px;">
+                    <input class="input" type="email" name="email" placeholder="Email" required>
+                    <input class="input" type="password" name="pswd" placeholder="Contraseña" required>
+                    <button class="login-button">Entrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
