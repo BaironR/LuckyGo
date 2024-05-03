@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sorter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SorterController extends Controller
 {
@@ -12,7 +13,7 @@ class SorterController extends Controller
      */
     public function index()
     {
-        //
+        return view('sorter.index');
     }
 
     /**
@@ -28,13 +29,6 @@ class SorterController extends Controller
      */
     public function store(Request $request)
     {
-        // Validar
-
-        Sorter::create([
-            'age' => $request->age,
-            'lotteries_entered' => $request->lotteries_entered,
-            'status' => $request->status
-        ]);
 
     }
 
