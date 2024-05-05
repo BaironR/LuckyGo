@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Sorter;
 use Illuminate\Http\Request;
+use App\Mail\PasswordMailable;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -16,7 +18,7 @@ class RegisterController extends Controller
     public function registerCreate(Request $request){
 
         $messages = makeMessages1();
-        $password = random_int(1, 9) . random_int(0, 9) . random_int(0, 9) . random_int(0, 9) . random_int(0, 9) . random_int(0, 9);
+        $password = mt_rand(100000,999999);
         $age = (int)$request->age;
 
         // Se validan los datos
@@ -26,7 +28,7 @@ class RegisterController extends Controller
             'age' => ['required','integer','min:18','max:65'],
         ], messages: $messages);
 
-        Sorter::create([
+        $sorter = Sorter::create([
             'email' => $request->email,
             'name' => $request->name,
             'age' => $request->age,
@@ -34,6 +36,8 @@ class RegisterController extends Controller
             'lotteries_entered' => 0,
             'status' => true
         ]);
+
+        Mail::to($request->email)->send(new PasswordMailable($password));
 
         auth()->attempt([
             'email' => $request->email,
