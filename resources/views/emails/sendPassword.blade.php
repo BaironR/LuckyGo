@@ -9,7 +9,7 @@
 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
     <h2>Nueva Contraseña</h2>
     <p>Tu nueva contraseña es: <strong>{{ $password }}</strong></p>
-    <p>Lucky Go</p>
+    <p>Atte., Lucky Go</p>
 </div>
 </body>
 </html>

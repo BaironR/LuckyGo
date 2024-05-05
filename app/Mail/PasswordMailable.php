@@ -14,10 +14,11 @@ class PasswordMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $password;
     /**
      * Create a new message instance.
      */
+    public $password;
+
     public function __construct(string $pwd)
     {
         $this->password = $pwd;
@@ -29,7 +30,7 @@ class PasswordMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('antonio.barraza.guzman@gmail.com', 'Antonio Barraza'),
+        // from: new Address('antonio.barraza.guzman@gmail.com', 'Antonio Barraza Guzmán'),
             subject: 'Envío de contraseña',
         );
     }
