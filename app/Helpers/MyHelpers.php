@@ -18,7 +18,7 @@ function makeMessages1(){
         'password.required' => "Debe ingresar la contraseña del sorteador.",
         'name.required' => "Debe ingresar el campo nombre del sorteador.",
         'age.required' => "Debe ingresar la edad del sorteador.",
-        'age.min' => 'La edad del sorteador no puede ser inferior a 18 y mayor a 65”',
+        'age.min' => 'La edad del sorteador no puede ser inferior a 18 y mayor a 65',
         'age.max' => 'La edad del sorteador no puede ser inferior a 18 y mayor a 65',
         'age.integer' => "La edad del sorteador debe ser númerica."
         ];
