@@ -19,11 +19,11 @@ Route::post('/login-admin', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 // Registro
-Route::get('/register', [RegisterController::class, 'registerForm'])->name('registerForm');
-Route::post('/register', [RegisterController::class, 'registerCreate'])->name('registerCreate');
 
 // Validar autenticación al ingresar url
 Route::middleware('auth')->group(callback: function(){
+    Route::post('/register', [RegisterController::class, 'registerCreate'])->name('registerCreate');
+    Route::get('/register', [RegisterController::class, 'registerForm'])->name('registerForm');
     Route::get('/sorters', [SorterController::class, 'index'])->name('sorters');
     Route::get('/enter-lottery', [PageController::class, 'page'])->name('enterLottery');
 });
