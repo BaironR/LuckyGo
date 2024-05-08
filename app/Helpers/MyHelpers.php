@@ -14,6 +14,7 @@ function makeMessages1(){
 
     $messages= [
         'email.required' => "Debe ingresar el correo electrónico del sorteador.",
+        'email.email' => "Debe ingresar el correo electrónico del sorteador.",
         'email.unique' => "El correo electrónico ingresado ya existe en el sistema.",
         'password.required' => "Debe ingresar la contraseña del sorteador.",
         'name.required' => "Debe ingresar el campo nombre del sorteador.",

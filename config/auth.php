@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'sorters' => [
+            'driver' => 'session',
+            'provider' => 'sorters',
+        ],
     ],
 
     /*
@@ -69,6 +74,11 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        'sorters' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Sorter::class,
+        ],
     ],
 
     /*

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sorter;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\PasswordMailable;
 use Illuminate\Support\Facades\Mail;
@@ -23,18 +23,20 @@ class RegisterController extends Controller
 
         // Se validan los datos
         $validated = $request->validate([
-            'name' => ['required', 'min:3'],
+            'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
             'age' => ['required','integer','min:18','max:65'],
         ], messages: $messages);
 
-        $sorter = Sorter::create([
+        $sorter = User::create([
             'email' => $request->email,
             'name' => $request->name,
             'age' => $request->age,
             'password' => $password,
             'lotteries_entered' => 0,
-            'status' => true
+            'status' => true,
+            'isAdmin' => false,
+            'isSorter' => true
         ]);
 
         Mail::to($request->email)->send(new PasswordMailable($password));

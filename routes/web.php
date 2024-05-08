@@ -4,7 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SorterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,6 +24,6 @@ Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(callback: function(){
     Route::post('/register', [RegisterController::class, 'registerCreate'])->name('registerCreate');
     Route::get('/register', [RegisterController::class, 'registerForm'])->name('registerForm');
-    Route::get('/sorters', [SorterController::class, 'index'])->name('sorters');
+    Route::get('/sorters', [UserController::class, 'index'])->name('sorters');
     Route::get('/enter-lottery', [PageController::class, 'page'])->name('enterLottery');
 });
