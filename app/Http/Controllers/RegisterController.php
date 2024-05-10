@@ -35,8 +35,8 @@ class RegisterController extends Controller
             'password' => $password,
             'lotteries_entered' => 0,
             'status' => true,
-            'isAdmin' => false,
-            'isSorter' => true
+            'is_admin' => false,
+            'is_sorter' => true
         ]);
 
         Mail::to($request->email)->send(new PasswordMailable($password));

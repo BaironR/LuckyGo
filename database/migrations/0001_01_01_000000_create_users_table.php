@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('age');
             $table->integer('lotteries_entered');
             $table->boolean('status');
-            $table->boolean('isAdmin');
-            $table->boolean('isSorter');
+            $table->boolean('is_admin');
+            $table->boolean('is_sorter');
             $table->rememberToken();
             $table->timestamps();
         });

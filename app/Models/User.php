@@ -23,8 +23,8 @@ class User extends Authenticatable
         'password',
         'lotteries_entered',
         'status',
-        'isAdmin',
-        'isSorter'
+        'is_admin',
+        'is_sorter'
     ];
 
     /**
