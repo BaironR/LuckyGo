@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'lotteries_entered' => 0,
             'status' => true,
             'is_admin' => true,
-            'is_sorter' => true
+            'is_sorter' => false
         ]);
     }
 }
