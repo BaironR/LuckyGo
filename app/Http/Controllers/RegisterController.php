@@ -17,7 +17,7 @@ class RegisterController extends Controller
     // Intento de iniciar sesion
     public function registerCreate(Request $request){
 
-        $messages = makeMessages1();
+        $messages = makeMessagesRegister();
         $password = mt_rand(100000,999999);
         $age = (int)$request->age;
 

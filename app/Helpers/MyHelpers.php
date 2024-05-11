@@ -1,8 +1,8 @@
 <?php
 
-function makeMessages()
+function makeMessagesLogin()
 {
-    $messages= [
+    $messages = [
         'email.required' => "Debe ingresar su correo electrónico para iniciar sesión.",
         'email.email' => "Usuario no registrado o contraseña incorrecta.",
         'password.required' => "Debe ingresar su contraseña para iniciar sesión."
@@ -10,7 +10,7 @@ function makeMessages()
     return $messages;
 }
 
-function makeMessages1(){
+function makeMessagesRegister(){
 
     $messages= [
         'email.required' => "Debe ingresar el correo electrónico del sorteador.",
