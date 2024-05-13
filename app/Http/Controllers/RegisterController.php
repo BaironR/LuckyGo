@@ -16,19 +16,20 @@ class RegisterController extends Controller
 
     // Intento de iniciar sesion
     public function registerCreate(Request $request){
+        if (connection_status()){
+            $messages = makeMessages1();
+            $password = mt_rand(100000,999999);
+            $age = (int)$request->age;
 
-        $messages = makeMessages1();
-        $password = mt_rand(100000,999999);
-        $age = (int)$request->age;
-
-        // Se validan los datos
-        $validated = $request->validate([
+            // Se validan los datos
+            $validated = $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
             'age' => ['required','integer','min:18','max:65'],
-        ], messages: $messages);
 
-        $sorter = User::create([
+            ], messages: $messages);
+
+            $sorter = User::create([
             'email' => $request->email,
             'name' => $request->name,
             'age' => $request->age,
@@ -37,15 +38,17 @@ class RegisterController extends Controller
             'status' => true,
             'is_admin' => false,
             'is_sorter' => true
-        ]);
+            ]);
+        
+            Mail::to($request->email)->send(new PasswordMailable($password));
 
-        Mail::to($request->email)->send(new PasswordMailable($password));
-
-        auth()->attempt([
+            auth()->attempt([
             'email' => $request->email,
             'password' => $password,
-        ]);
+            ]);
 
-        return redirect()->route('sorters');
+            return redirect()->route('sorters');
+        }
+        return redirect()->route('registerForm');
     }
 }
