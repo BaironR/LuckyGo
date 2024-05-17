@@ -21,7 +21,7 @@ class LoginController extends Controller
 
     public function login(Request $request){
 
-        $messages = makeMessages();
+        $messages = makeMessagesLogin();
 
         // Se validan los datos
         $validated = $request->validate([
@@ -45,7 +45,7 @@ class LoginController extends Controller
     // Intento de iniciar sesion
     public function loginSorters(Request $request){
 
-        $messages = makeMessages();
+        $messages = makeMessagesLogin();
 
         // Se validan los datos
         $validated = $request->validate([
