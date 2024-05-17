@@ -30,7 +30,7 @@ class PasswordMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-        // from: new Address('antonio.barraza.guzman@gmail.com', 'Antonio Barraza Guzmán'),
+            from: new Address('antonio.barraza.guzman@gmail.com', 'Antonio Barraza Guzmán'),
             subject: 'Envío de contraseña',
         );
     }

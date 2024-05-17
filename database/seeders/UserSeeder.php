@@ -22,8 +22,8 @@ class UserSeeder extends Seeder
             'age' => 0,
             'lotteries_entered' => 0,
             'status' => true,
-            'isAdmin' => true,
-            'isSorter' => true
+            'is_admin' => true,
+            'is_sorter' => false
         ]);
     }
 }
