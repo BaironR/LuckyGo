@@ -10,7 +10,7 @@
             </a>
         </div>
         <div class ="mb-7 flex items-center justify-center">
-            <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">Iniciar Sesion</span>
+            <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">Iniciar Sesión</span>
         </div>
         <div class="mb-5">
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo electrónico</label>
