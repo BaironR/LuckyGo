@@ -33,7 +33,10 @@
 
                 @guest
 
-
+                        <li>
+                            <a href="{{route('loginAdminForm')}}"
+                               class="block py-2 px-3 text-blue-600 rounded hover:bg-blue-600 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Registrar Sorteador</a>
+                        </li>
                         <li>
                             <a href="{{route('loginForm')}}"
                                class="block py-2 px-3 text-blue-600 rounded hover:bg-blue-600 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Iniciar sesión</a>
