@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form class="max-w-sm mx-auto" method = "POST" action = "{{route('loginSorters')}}" novalidate>
+    <form class="max-w-sm mx-auto" method = "POST" action = "{{route('login')}}" novalidate>
         @csrf
         <div class="mb-7 flex items-center justify-center">
             <a href="https://imgbb.com/" class="flex items-center justify-center">

@@ -29,36 +29,18 @@ class LoginController extends Controller
             'password' => ['required'],
         ], $messages);
 
-        // Verificar credenciales específicas
-        if ($validated['email'] !== 'antonio.barraza.guzman@gmail.com' || $validated['password'] !== 'Luckygo23') {
-            return back()->with('message', 'Credenciales incorrectas.');
-        }
-
         // Intento de autenticar al usuario
         if (!auth()->attempt($validated, $request->remember)) {
             return back()->with('message', 'Usuario no registrado o contraseña incorrecta.');
         }
 
-        return redirect()->route('registerForm');
-    }
+        $user = auth()->user();
 
-    // Intento de iniciar sesion
-    public function loginSorters(Request $request){
+        if ($user->is_admin && !$user->is_sorter) {
+            return redirect()->route('registerForm');
 
-        $messages = makeMessagesLogin();
-
-        // Se validan los datos
-        $validated = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ], messages: $messages);
-
-        // Intento de autenticar al usuario
-
-        if(!auth()->attempt($request->only('email','password'), remember: $request->remember)){
-            return redirect()->back()->with('message', 'Usuario no registrado o contraseña incorrecta.');
+        } else {
+            return redirect()->route('enterLottery');
         }
-
-        return redirect()->route('enterLottery');
     }
 }

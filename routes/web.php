@@ -12,10 +12,8 @@ Route::get('/', function () {
 });
 
 // Login y logout de usuarios
-Route::get('/login-sorters', [LoginController::class, 'loginForm'])->name('loginForm');
-Route::get('/login-admin', [LoginController::class, 'loginAdminForm'])->name('loginAdminForm');
-Route::post('/login-sorters', [LoginController::class, 'loginSorters'])->name('loginSorters');
-Route::post('/login-admin', [LoginController::class, 'login'])->name('login');
+Route::get('/login', [LoginController::class, 'loginForm'])->name('loginForm');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 // Registro
