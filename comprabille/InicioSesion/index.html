@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Go</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel='stylesheet' href="../css/all.css">
+    <style>
+        header {
+            display: flex;
+            flex-direction: column; /* Para apilar elementos verticalmente */
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        #logo {
+            max-width: 200px; /* ajusta el tamaño del logo según tu necesidad */
+            margin-bottom: 10px; /* ajusta el espacio entre el logo y el título */
+        }
+
+        h1 {
+            text-align: center; /* Centra el texto */
+            font-size: 50px; /* Tamaño del texto */
+        }
+    </style>
+</head>
+<body>
+    <header>
+    </header>
+    <div class="get-started" id="login-screen">
+        <p>
+            <img id="logo" src="logo.png" alt="L">
+            <h1>Lucky Go</h1>
+            <span class="login-p-subtitle"></span>
+        </p>
+        <input type="text" name="email" id="email" placeholder="Correo Electrónico" class="login-form">
+        <input type="password" name="password" id="password" class="login-form" placeholder="Contraseña">
+        <input type="button" value="Iniciar Sesión" class="login-btn" onclick="login()">
+    </div>
+    <script src="../js/all.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>

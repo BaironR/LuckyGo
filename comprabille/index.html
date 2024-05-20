@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra de billetes de lotería</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #b2d7b2;
+            text-align: center;
+            position: relative;
+        }
+
+        .login-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .login-button:hover {
+                background-color: #0056b3;
+            }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            margin: 0 auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+            .logo img {
+                width: 150px; /* Ajusta este valor al tamaño deseado */
+                margin-bottom: 20px;
+            }
+
+            .logo span {
+                color: green;
+            }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .numbers {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+        }
+
+            .number.selected {
+                background-color: #2ECC71;
+                border-color: #2ECC71;
+                color: white;
+            }
+
+        .luck {
+            margin: 20px 0;
+        }
+
+            .luck label {
+                cursor: pointer;
+            }
+
+        .info {
+            background-color: #e6e6fa;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .total {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .play-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .play-button:hover {
+                background-color: #218838;
+            }
+    </style>
+</head>
+<body>
+    <button class="login-button" onclick="redirectToLogin()">Iniciar sesión</button>
+    <div class="container">
+        <div class="logo">
+            <img id="logo" src="logo.png" alt="">
+        </div>
+        <div class="title">
+            Compra de billetes de lotería
+        </div>
+        <div>
+            Selecciones 5 números del 1 al 30:
+        </div>
+        <div class="numbers">
+            <div class="number" onclick="toggleNumber(this)">1</div>
+            <div class="number" onclick="toggleNumber(this)">2</div>
+            <div class="number" onclick="toggleNumber(this)">3</div>
+            <div class="number" onclick="toggleNumber(this)">4</div>
+            <div class="number" onclick="toggleNumber(this)">5</div>
+            <div class="number" onclick="toggleNumber(this)">6</div>
+            <div class="number" onclick="toggleNumber(this)">7</div>
+            <div class="number" onclick="toggleNumber(this)">8</div>
+            <div class="number" onclick="toggleNumber(this)">9</div>
+            <div class="number" onclick="toggleNumber(this)">10</div>
+            <div class="number" onclick="toggleNumber(this)">11</div>
+            <div class="number" onclick="toggleNumber(this)">12</div>
+            <div class="number" onclick="toggleNumber(this)">13</div>
+            <div class="number" onclick="toggleNumber(this)">14</div>
+            <div class="number" onclick="toggleNumber(this)">15</div>
+            <div class="number" onclick="toggleNumber(this)">16</div>
+            <div class="number" onclick="toggleNumber(this)">17</div>
+            <div class="number" onclick="toggleNumber(this)">18</div>
+            <div class="number" onclick="toggleNumber(this)">19</div>
+            <div class="number" onclick="toggleNumber(this)">20</div>
+            <div class="number" onclick="toggleNumber(this)">21</div>
+            <div class="number" onclick="toggleNumber(this)">22</div>
+            <div class="number" onclick="toggleNumber(this)">23</div>
+            <div class="number" onclick="toggleNumber(this)">24</div>
+            <div class="number" onclick="toggleNumber(this)">25</div>
+            <div class="number" onclick="toggleNumber(this)">26</div>
+            <div class="number" onclick="toggleNumber(this)">27</div>
+            <div class="number" onclick="toggleNumber(this)">28</div>
+            <div class="number" onclick="toggleNumber(this)">29</div>
+            <div class="number" onclick="toggleNumber(this)">30</div>
+        </div>
+        <div class="luck">
+            <input type="checkbox" id="luck" name="luck">
+            <label for="luck">Tendré Suerte (+$1000)</label>
+        </div>
+        <div class="info">
+            Para participar en el sorteo de cada domingo asegúrate de realizar la compra de tus billetes antes de las 23:59 horas de ese mismo día. Todas las compras efectuadas dentro de este plazo serán incluidas en el sorteo correspondiente.
+        </div>
+        <div class="total">
+            Total: $2.000
+        </div>
+        <button class="play-button">Jugar</button>
+    </div>
+    <script>
+        function toggleNumber(element) {
+            const selectedNumbers = document.querySelectorAll('.number.selected');
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+            } else if (selectedNumbers.length < 5) {
+                element.classList.add('selected');
+            }
+        }
+
+        function redirectToLogin() {
+            window.location.href = '/compraBille/InicioSesion/index.html';
+        }
+    </script>
+</body>
+</html>
