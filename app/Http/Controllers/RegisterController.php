@@ -10,6 +10,8 @@ use Exception;
 
 class RegisterController extends Controller
 {
+
+
     public function registerForm(){
         return view('auth.register');
     }
