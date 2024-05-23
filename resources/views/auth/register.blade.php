@@ -13,7 +13,7 @@
 
             <div class="mb-5 flex items-center justify-center">
                 <a href="https://imgbb.com/" class="flex items-center justify-center">
-                    <img src="https://i.ibb.co/qBNsMDR/f653f8a2-5f7c-4959-82cf-17ac69e415c8.jpg" alt="f653f8a2-5f7c-4959-82cf-17ac69e415c8" border="0" class="w-44" />
+                    <img src="https://i.ibb.co/qBNsMDR/f653f8a2-5f7c-4959-82cf-17ac69e415c8.jpg" alt="LuckyGo" border="0" class="w-44" />
                 </a>
             </div>
             <div class="mb-8 flex items-center justify-center">
