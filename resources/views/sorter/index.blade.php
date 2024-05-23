@@ -22,6 +22,8 @@
                     <th class="text-left p-3 px-5">Estado</th>
                   </tr>
                 </thead>
+                
+{{-- I couldn't figure out how to make the actual model, yet it should be something like the next comented code --}}
 {{--                 <tbody>
                         @foreach ($users as $user)
                     <tr>
