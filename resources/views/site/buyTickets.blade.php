@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="bg-green-200 text-center min-h-screen flex flex-col items-center">
         <div class="container mx-auto mt-10 p-5 bg-white rounded-lg shadow-lg max-w-md">
             <div class="mb-5 flex items-center justify-center">
