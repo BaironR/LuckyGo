@@ -7,7 +7,6 @@
                 {{ session('error') }}
             </div>
         @endif
-
             <form class="max-w-sm mx-auto" method = "POST" action = "{{route('registerCreate')}}" novalidate>
                 @csrf
 

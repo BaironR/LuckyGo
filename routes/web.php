@@ -7,13 +7,12 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/buy-tickets', function () {
+Route::get('/', function () {
     return view(view: 'site.buyTickets');
 });
 
 // Ruta página de venta de billetes
 Route::get('/buy-tickets', [PageController::class, 'buyTickets'])->name('buyTickets');
-
 
 // Login y logout de usuarios
 Route::get('/login', [LoginController::class, 'loginForm'])->name('loginForm');
