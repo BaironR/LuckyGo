@@ -7,12 +7,9 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/buy-tickets', function () {
     return view(view: 'site.buyTickets');
 });
-// Route::get('/buy-tickets', function () {
-   // return view(view: 'site.buyTickets');
-// });
 
 // Ruta página de venta de billetes
 Route::get('/buy-tickets', [PageController::class, 'buyTickets'])->name('buyTickets');
@@ -31,4 +28,5 @@ Route::middleware('auth')->group(callback: function(){
     Route::get('/register', [RegisterController::class, 'registerForm'])->name('registerForm');
     Route::get('/sorters', [UserController::class, 'index'])->name('sorters');
     Route::get('/enter-lottery', [PageController::class, 'page'])->name('enterLottery');
+    Route::post('/update-status/{id}', [UserController::class, 'updateStatus'])->name('updateStatus');
 });
