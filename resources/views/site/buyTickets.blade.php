@@ -19,6 +19,7 @@
                     <div class="number flex items-center justify-center w-10 h-10 border-2 border-gray-300 rounded cursor-pointer bg-white" onclick="toggleNumber(this)">{{ $i }}</div>
                 @endfor
             </div>
+            <div id="error-message" class="bg-red-500 text-white my-2 rounded-lg text-lg text-center p-2 hidden">Debe seleccionar exactamente 5 números.</div>
             <div class="luck my-5">
                 <input type="checkbox" id="luck" name="luck" onchange="updateTotal()">
                 <label for="luck" class="cursor-pointer">Tendré Suerte (+$1000)</label>
@@ -59,7 +60,7 @@
 
             </div>
         </div>
-        
+
     </div>
     <style>
         .number {
@@ -101,7 +102,31 @@
             }
         }
 
+        function validateSelection() {
+            const selectedNumbers = document.querySelectorAll('.number.selected');
+            const errorMessage = document.getElementById('error-message');
+
+            if (selectedNumbers.length !== 5) {
+                errorMessage.classList.remove('hidden');
+
+                // Ocultar el mensaje de error después de 3 segundos
+                setTimeout(() => {
+                    errorMessage.classList.add('hidden');
+                }, 3000);
+                return false;
+
+            } else {
+                errorMessage.classList.add('hidden');
+                return true;
+            }
+        }
+
         function showModal() {
+
+            if (!validateSelection()) {
+                return;
+            }
+
             const selectedNumbers = Array.from(document.querySelectorAll('.number.selected')).map(el => el.textContent).join(' - ');
             const total = document.getElementById('totalAmount').textContent;
 
@@ -128,7 +153,8 @@
 
             closeModal();
 
-            const ticketNumber = 'LG' + Math.floor(Math.random() * 1000 + 1000); // Genera un número de billete único
+
+            const ticketNumber = 'LG' + (Math.floor(Math.random() * 899) + 100) // Genera un número de billete único
             const purchaseDate = new Date().toLocaleString();
 
             document.getElementById('ticketNumber').textContent = ticketNumber;
