@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'email' => 'antonio.barraza.guzman@gmail.com',
             'password' => Hash::make('Luckygo23'),
             'age' => 0,
-            'lotteries_entered' => 0,
+            'raffles_entered' => 0,
             'status' => true,
             'is_admin' => true,
             'is_sorter' => false

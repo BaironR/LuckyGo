@@ -39,7 +39,7 @@ class RegisterController extends Controller
                 'name' => $request->name,
                 'age' => $request->age,
                 'password' => $password,
-                'lotteries_entered' => 0,
+                'raffles_entered' => 0,
                 'status' => true,
                 'is_admin' => false,
                 'is_sorter' => true

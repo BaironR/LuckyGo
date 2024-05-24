@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('age');
-            $table->integer('lotteries_entered');
+            $table->integer('raffles_entered');
             $table->boolean('status');
             $table->boolean('is_admin');
             $table->boolean('is_sorter');

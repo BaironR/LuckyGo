@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'age',
         'password',
-        'lotteries_entered',
+        'raffles_entered',
         'status',
         'is_admin',
         'is_sorter'
