@@ -21,6 +21,11 @@
                 @endfor
             </div>
             <div id="error-message" class="bg-red-500 text-white my-2 rounded-lg text-lg text-center p-2 hidden">Debe seleccionar exactamente 5 números.</div>
+
+            @error('id')
+            <p id="message-error" class="bg-red-500 text-white my-2 rounded-lg text-lg text-center p-2">{{ $message }}</p>
+            @enderror
+
             <div class="luck my-5">
                 <input type="checkbox" id="luck" name="luck" onchange="updateTotal()">
                 <label for="luck" class="cursor-pointer">Tendré Suerte (+$1000)</label>
@@ -42,27 +47,17 @@
                 <p>El valor total de tu billete es <span id="totalValue"></span>.</p>
                 <p>¿Deseas continuar?</p>
                 <div class="flex justify-around mt-5">
-                    <button class="modal-button cancel-button bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="confirmPurchase()">Confirmar</button>
-                    <button class="modal-button cancel-button bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600" onclick="closeModal()">Cancelar</button>
-                </div>
-            </div>
-        </div>
 
-        <div id="resultModal" class="modal fixed z-50 inset-0 overflow-y-auto hidden">
-            <div class="result-modal-content bg-white p-5 rounded-lg shadow-lg max-w-md mx-auto mt-20">
-                <p class="success-message">¡Compra realizada exitosamente!</p>
-                <p>Tu número de billete es el <span id="ticketNumber"></span></p>
-                <p>Fecha <span id="purchaseDate"></span></p>
-                <p style="color:green">Juega con responsabilidad en LuckyGo</p>
-                <div class="flex justify-around mt-5">
                     <form method="POST" action="{{ route('buyTicket') }}" id="purchaseForm">
                         @csrf
                         <input type="hidden" name="selected_numbers" id="formSelectedNumbers">
                         <input type="hidden" name="luck" id="formLuck" value="0">
                         <input type="hidden" name="purchase_date" id="formPurchaseDate">
-                        <input type="hidden" name="ticket_number" id="formTicketNumber">
-                        <button class="modal-button confirm-button bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="closeResultModal()">Cerrar</button>
+                        <input type="hidden" name="id" id="formTicketNumber">
+                        <button class="modal-button cancel-button bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="confirmPurchase()">Confirmar</button>
                     </form>
+
+                    <button class="modal-button cancel-button bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600" onclick="closeModal()">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -150,19 +145,55 @@
 
             closeModal();
 
-            const ticket_number = 'LG' + (Math.floor(Math.random() * 899) + 100) // Genera un número de billete único
+            const id = 'LG' + (Math.floor(Math.random() * 899) + 100) // Genera un número de billete único
             const purchase_date = new Date().toLocaleString();
-
-            document.getElementById('ticketNumber').textContent = ticket_number;
-            document.getElementById('purchaseDate').textContent = purchase_date;
-            document.getElementById('resultModal').style.display = 'block';
-            document.getElementById('formTicketNumber').value = ticket_number;
+            document.getElementById('formTicketNumber').value = id;
             document.getElementById('formPurchaseDate').value = purchase_date;
         }
 
-        function closeResultModal() {
-            document.getElementById('resultModal').style.display = 'none';
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            // Selecciona el elemento del mensaje de error
+            const error_message = document.getElementById('message-error');
+
+            // Verifica si el mensaje de error existe y está visible
+            if (error_message && !error_message.classList.contains('hidden')) {
+                // Oculta el mensaje de error después de 3 segundos
+                setTimeout(() => {
+                    error_message.classList.add('hidden');
+                }, 5000);
+            }
+        });
     </script>
+
+    @if(session('purchase_successful'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                setTimeout(function() {
+                    // Muestra la ventana emergente después del tiempo especificado
+                    document.getElementById('resultModal').style.display = 'block';
+                    // Limpia la variable de sesión después de mostrar el modal
+                    @php session()->forget('purchase_successful'); @endphp
+                });
+            });
+
+
+            function closeResultModal() {
+                document.getElementById('resultModal').style.display = 'none';
+            }
+        </script>
+
+        <div id="resultModal" class="modal fixed z-50 inset-0 overflow-y-auto hidden">
+            <div class="result-modal-content bg-white p-5 rounded-lg shadow-lg max-w-md mx-auto mt-20">
+                <p class="success-message">¡Compra realizada exitosamente!</p>
+                <p>Tu número de billete es el <span id="ticketNumber">{{ session('id') }}</span></p>
+                <p>Fecha <span id="purchaseDate">{{ session('purchase_date') }}</span></p>
+                <p style="color:green">Juega con responsabilidad en LuckyGo</p>
+                <div class="flex justify-around mt-5">
+                    <button class="modal-button confirm-button bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="closeResultModal()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+    @endif
 
 @endsection
