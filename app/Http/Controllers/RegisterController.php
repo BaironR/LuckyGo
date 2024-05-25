@@ -50,7 +50,7 @@ class RegisterController extends Controller
                 'password' => $password,
             ]);
 
-            return redirect()->route('sorters');
+            return redirect()->route('raffletors');
 
         } catch (Exception $e) {
             // Si hay una excepción, retorna con un mensaje de error

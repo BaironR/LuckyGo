@@ -38,7 +38,7 @@
                             <td class="text-left p-3 px-5">{{ $user->name }}</td>
                             <td class="text-left p-3 px-5">{{ $user->email }}</td>
                             <td class="text-left p-3 px-5">{{ $user->age }}</td>
-                            <td class="text-left p-3 px-5">{{ $user->lotteries_entered }}</td>
+                            <td class="text-left p-3 px-5">{{ $user->raffles_entered }}</td>
                             <td>
                                 <form action="{{ route('updateStatus', $user->id) }}" method="POST">
                                     @csrf
@@ -57,8 +57,6 @@
         @endif
     </div>
 
-
-
     @if (session('success'))
         <div class="bg-green-300 text-green-800 w-1/2 mx-auto my-2 rounded-lg text-lg text-center p-2" id="successMessage">
             {{ session('success') }}
@@ -74,9 +72,7 @@
                 }
             }, 3000); // 3000 milisegundos = 3 segundos
         });
-    </script>
 
-    <script>
         function searchTable() {
 
             var input, filter, table, tr, td, i, j, txtValue;

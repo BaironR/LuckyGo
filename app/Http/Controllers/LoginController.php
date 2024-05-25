@@ -37,10 +37,10 @@ class LoginController extends Controller
         $user = auth()->user();
 
         if ($user->is_admin && !$user->is_sorter) {
-            return redirect()->route('sorters');
+            return redirect()->route('raffletors');
 
         } else {
-            return redirect()->route('enterLottery');
+            return redirect()->route('enterRaffle');
         }
     }
 }

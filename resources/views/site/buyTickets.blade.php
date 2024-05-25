@@ -42,7 +42,7 @@
                 <p>El valor total de tu billete es <span id="totalValue"></span>.</p>
                 <p>¿Deseas continuar?</p>
                 <div class="flex justify-around mt-5">
-                    <button class="modal-button confirm-button bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="confirmPurchase()">Confirmar</button>
+                    <button class="modal-button cancel-button bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="confirmPurchase()">Confirmar</button>
                     <button class="modal-button cancel-button bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600" onclick="closeModal()">Cancelar</button>
                 </div>
             </div>
@@ -54,15 +54,20 @@
                 <p>Tu número de billete es el <span id="ticketNumber"></span></p>
                 <p>Fecha <span id="purchaseDate"></span></p>
                 <p style="color:green">Juega con responsabilidad en LuckyGo</p>
-
                 <div class="flex justify-around mt-5">
-                    <button class="modal-button confirm-button bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="closeResultModal()">Cerrar</button>
+                    <form method="POST" action="{{ route('buyTicket') }}" id="purchaseForm">
+                        @csrf
+                        <input type="hidden" name="selected_numbers" id="formSelectedNumbers">
+                        <input type="hidden" name="luck" id="formLuck" value="0">
+                        <input type="hidden" name="purchase_date" id="formPurchaseDate">
+                        <input type="hidden" name="ticket_number" id="formTicketNumber">
+                        <button class="modal-button confirm-button bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="closeResultModal()">Cerrar</button>
+                    </form>
                 </div>
-
             </div>
         </div>
-
     </div>
+
     <style>
         .number {
             display: flex;
@@ -85,68 +90,59 @@
 
     <script>
         function toggleNumber(element) {
-            const selectedNumbers = document.querySelectorAll('.number.selected');
+            const selected_numbers = document.querySelectorAll('.number.selected');
             if (element.classList.contains('selected')) {
                 element.classList.remove('selected');
-            } else if (selectedNumbers.length < 5) {
+            } else if (selected_numbers.length < 5) {
                 element.classList.add('selected');
             }
         }
 
         function updateTotal() {
-            const luckCheckbox = document.getElementById('luck');
-            const totalAmount = document.getElementById('totalAmount');
-            if (luckCheckbox.checked) {
-                totalAmount.textContent = '$3.000';
+            const luck_checkbox = document.getElementById('luck');
+            const total_amount = document.getElementById('totalAmount');
+            document.getElementById('formLuck').value = luck_checkbox.checked ? 1 : 0;
+            if (luck_checkbox.checked) {
+                total_amount.textContent = '$3.000';
             } else {
-                totalAmount.textContent = '$2.000';
+                total_amount.textContent = '$2.000';
             }
         }
 
         function validateSelection() {
-            const selectedNumbers = document.querySelectorAll('.number.selected');
-            const errorMessage = document.getElementById('error-message');
+            const selected_numbers = document.querySelectorAll('.number.selected');
+            const error_message = document.getElementById('error-message');
 
-            if (selectedNumbers.length !== 5) {
-                errorMessage.classList.remove('hidden');
+            if (selected_numbers.length !== 5) {
+                error_message.classList.remove('hidden');
 
                 // Ocultar el mensaje de error después de 3 segundos
                 setTimeout(() => {
-                    errorMessage.classList.add('hidden');
+                    error_message.classList.add('hidden');
                 }, 3000);
                 return false;
 
             } else {
-                errorMessage.classList.add('hidden');
+                error_message.classList.add('hidden');
                 return true;
             }
         }
 
         function showModal() {
-
             if (!validateSelection()) {
                 return;
             }
 
-            const selectedNumbers = Array.from(document.querySelectorAll('.number.selected')).map(el => el.textContent).join(' - ');
+            const selected_numbers = Array.from(document.querySelectorAll('.number.selected')).map(el => el.textContent).join(' - ');
             const total = document.getElementById('totalAmount').textContent;
-
-            document.getElementById('selectedNumbers').textContent = selectedNumbers;
+            document.getElementById('selectedNumbers').textContent = selected_numbers;
             document.getElementById('totalValue').textContent = total;
-
+            document.getElementById('formSelectedNumbers').value = selected_numbers;
             document.getElementById('confirmationModal').style.display = 'block';
+
         }
 
         function closeModal() {
-
-            // Obtener todos los elementos con la clase "number" que están seleccionados
-            const selectedNumbers = document.querySelectorAll('.number.selected');
-
-            // Eliminar la clase "selected" de todos los números seleccionados
-            selectedNumbers.forEach(number => {
-                number.classList.remove('selected');
-            });
-
             document.getElementById('confirmationModal').style.display = 'none';
         }
 
@@ -154,23 +150,19 @@
 
             closeModal();
 
+            const ticket_number = 'LG' + (Math.floor(Math.random() * 899) + 100) // Genera un número de billete único
+            const purchase_date = new Date().toLocaleString();
 
-            const ticketNumber = 'LG' + (Math.floor(Math.random() * 899) + 100) // Genera un número de billete único
-            const purchaseDate = new Date().toLocaleString();
-
-            document.getElementById('ticketNumber').textContent = ticketNumber;
-            document.getElementById('purchaseDate').textContent = purchaseDate;
-
+            document.getElementById('ticketNumber').textContent = ticket_number;
+            document.getElementById('purchaseDate').textContent = purchase_date;
             document.getElementById('resultModal').style.display = 'block';
+            document.getElementById('formTicketNumber').value = ticket_number;
+            document.getElementById('formPurchaseDate').value = purchase_date;
         }
 
         function closeResultModal() {
             document.getElementById('resultModal').style.display = 'none';
         }
-
     </script>
 
-
 @endsection
-
-
