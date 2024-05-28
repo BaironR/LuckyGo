@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\site"
   ],
+  "SelectedNode": "\\resources\\views\\site",
   "PreviewInSolutionExplorer": false
 }
