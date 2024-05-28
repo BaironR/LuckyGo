@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +23,7 @@ class User extends Authenticatable
         'name',
         'age',
         'password',
-        'lotteries_entered',
+        'raffles_entered',
         'status',
         'is_admin',
         'is_sorter'
@@ -43,7 +45,6 @@ class User extends Authenticatable
      * @return array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
         'is_admin' => 'boolean',
         'is_sorter' => 'boolean',

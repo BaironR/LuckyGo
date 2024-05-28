@@ -26,3 +26,12 @@ function makeMessagesRegister(){
 
     return $messages;
 }
+
+function makeMessagesTickets(){
+
+    $messages = [
+        'id.unique' => "El código generado aleatoriamente ya se encuentra en el sistema, lo sentimos, intente nuevamente.",
+    ];
+
+    return $messages;
+}

@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('id', '!=', 1)->get();
-        return view('sorter.index', compact('users'));
+        return view('raffletor.index', compact('users'));
     }
 
     public function updateStatus(Request $request, $id)
@@ -27,7 +27,7 @@ class UserController extends Controller
             $user->status = $request->input('status');
             $user->save();
 
-            return redirect()->route('sorters')->with('success', 'Estado actualizado correctamente');
+            return redirect()->route('raffletors')->with('success', 'Estado actualizado correctamente');
         }
     }
 
