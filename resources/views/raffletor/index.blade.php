@@ -63,6 +63,18 @@
         </div>
     @endif
 
+    @if (session('registration_success'))
+        <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75">
+            <div class="bg-white p-5 rounded-lg shadow-lg max-w-md mx-auto">
+                <p class="text-lg font-semibold text-center">¡Usuario registrado exitosamente!</p>
+                <p class="mt-4 text-center">El usuario {{ session('username') }} ha sido registrado correctamente.</p>
+                <div class="flex justify-center mt-5">
+                    <button class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="document.getElementById('successModal').style.display = 'none'">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             setTimeout(function() {
