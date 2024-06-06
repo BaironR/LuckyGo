@@ -1,10 +1,15 @@
 {
   "ExpandedNodes": [
     "",
+    "\\database",
+    "\\database\\factories",
+    "\\database\\migrations",
+    "\\database\\seeders",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\site"
+    "\\resources\\views\\emails",
+    "\\resources\\views\\layouts",
+    "\\resources\\views\\raffletor"
   ],
-  "SelectedNode": "\\resources\\views\\site",
   "PreviewInSolutionExplorer": false
 }
