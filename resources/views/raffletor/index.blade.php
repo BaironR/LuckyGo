@@ -38,17 +38,8 @@
                             <td class="text-left p-3 px-5">{{ $user->name }}</td>
                             <td class="text-left p-3 px-5">{{ $user->email }}</td>
                             <td class="text-left p-3 px-5">{{ $user->age }}</td>
-                            <td class="text-left p-3 px-5">{{ $user->raffles_entered }}</td>
-                            <td>
-                                <form action="{{ route('updateStatus', $user->id) }}" method="POST">
-                                    @csrf
-                                    @method('POST')
-                                    <select name="status" class="status-dropdown p-2 border rounded" onchange="this.form.submit()">
-                                        <option value="1" {{ $user->status == 1 ? 'selected' : '' }}>Habilitado</option>
-                                        <option value="0" {{ $user->status == 0 ? 'selected' : '' }}>Deshabilitado</option>
-                                    </select>
-                                </form>
-                            </td>
+                            <td class="text-left p-3 px-5">{{ $user->raffles_count }}</td>
+                            <td class="text-left p-3 px-5">{{ $user->status }}</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -57,47 +48,30 @@
         @endif
     </div>
 
-    @if (session('success'))
-        <div class="bg-green-300 text-green-800 w-1/2 mx-auto my-2 rounded-lg text-lg text-center p-2" id="successMessage">
-            {{ session('success') }}
-        </div>
-    @endif
+<script>
+function searchTable() {
+    // Obtener el valor del input y limpiar espacios
+    var input = document.getElementById('searchInput');
+    var filter = input.value.toLowerCase().trim();
+    var table = document.getElementById('sorteadoresTable');
+    var tr = table.getElementsByTagName('tr');
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(function() {
-                var successMessage = document.getElementById('successMessage');
-                if (successMessage) {
-                    successMessage.style.display = 'none';
-                }
-            }, 3000); // 3000 milisegundos = 3 segundos
-        });
-
-        function searchTable() {
-
-            var input, filter, table, tr, td, i, j, txtValue;
-            input = document.getElementById("searchInput");
-            filter = input.value.toLowerCase();
-            table = document.getElementById("sorteadoresTable");
-            tr = table.getElementsByTagName("tr");
-
-            for (i = 1; i < tr.length; i++) {
-                tr[i].classList.remove("highlight");
+    for (var i = 1; i < tr.length; i++) {
+        var tdName = tr[i].getElementsByTagName('td')[1];
+        var tdEmail = tr[i].getElementsByTagName('td')[2];
+        if (tdName || tdEmail) {
+            var txtValueName = tdName.textContent || tdName.innerText;
+            var txtValueEmail = tdEmail.textContent || tdEmail.innerText;
+            if (txtValueName.toLowerCase().indexOf(filter) > -1 || txtValueEmail.toLowerCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
                 tr[i].style.display = "none";
-                td = tr[i].getElementsByTagName("td");
-                for (j = 0; j < td.length; j++) {
-                    if (td[j]) {
-                        txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                            tr[i].classList.add("highlight");
-                            break;
-                        }
-                    }
-                }
             }
-        }
-    </script>
+        }       
+    }
+}
+</script>
 
 @endsection
+
 
