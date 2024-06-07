@@ -183,7 +183,7 @@
         </script>
 
         <div id="resultModal" class="modal fixed z-50 inset-0 overflow-y-auto hidden">
-            <div class="result-modal-content bg-white p-5 rounded-lg shadow-lg max-w-md mx-auto mt-20">
+            <div class="result-modal-content bg-white p-5 rounded-lg shadow-lg max-w-md mx-auto mt-20 border-2 border-black">
                 <p class="success-message">¡Compra realizada exitosamente!</p>
                 <p>Tu número de billete es el <span id="ticketNumber">{{ session('id') }}</span></p>
                 <p>Fecha <span id="purchaseDate">{{ session('purchase_date') }}</span></p>
