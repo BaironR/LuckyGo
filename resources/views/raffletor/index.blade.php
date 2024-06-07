@@ -38,7 +38,7 @@
                             <td class="text-left p-3 px-5">{{ $user->name }}</td>
                             <td class="text-left p-3 px-5">{{ $user->email }}</td>
                             <td class="text-left p-3 px-5">{{ $user->age }}</td>
-                            <td class="text-left p-3 px-5">{{ $user->raffles_count }}</td>
+                            <td class="text-left p-3 px-5">{{ $user->raffles_entered}}</td>
                             <td class="text-left p-3 px-5">{{ $user->status }}</td>
                         </tr>
                     @endforeach
@@ -67,7 +67,7 @@ function searchTable() {
             } else {
                 tr[i].style.display = "none";
             }
-        }       
+        }
     }
 }
 </script>
