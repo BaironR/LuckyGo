@@ -83,34 +83,44 @@
                     successMessage.style.display = 'none';
                 }
             }, 3000); // 3000 milisegundos = 3 segundos
+
+            // Ordenar la tabla por defecto al cargar la página
+            sortTable(1);
         });
 
         function searchTable() {
+            var input = document.getElementById('searchInput');
+            var filter = input.value.toLowerCase().trim();
+            var table = document.getElementById('sorteadoresTable');
+            var tr = table.getElementsByTagName('tr');
 
-            var input, filter, table, tr, td, i, j, txtValue;
-            input = document.getElementById("searchInput");
-            filter = input.value.toLowerCase();
-            table = document.getElementById("sorteadoresTable");
-            tr = table.getElementsByTagName("tr");
-
-            for (i = 1; i < tr.length; i++) {
-                tr[i].classList.remove("highlight");
-                tr[i].style.display = "none";
-                td = tr[i].getElementsByTagName("td");
-                for (j = 0; j < td.length; j++) {
-                    if (td[j]) {
-                        txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                            tr[i].classList.add("highlight");
-                            break;
-                        }
+            for (var i = 1; i < tr.length; i++) {
+                var tdName = tr[i].getElementsByTagName('td')[1];
+                var tdEmail = tr[i].getElementsByTagName('td')[2];
+                if (tdName || tdEmail) {
+                    var txtValueName = tdName.textContent || tdName.innerText;
+                    var txtValueEmail = tdEmail.textContent || tdEmail.innerText;
+                    if (txtValueName.toLowerCase().indexOf(filter) > -1 || txtValueEmail.toLowerCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
                     }
                 }
+            }
+        }
+
+        function sortTable(columnIndex) {
+            var table = document.getElementById('sorteadoresTable');
+            var rows = Array.prototype.slice.call(table.getElementsByTagName('tr'), 1);
+            rows.sort(function(a, b) {
+                var A = a.getElementsByTagName('td')[columnIndex].innerText.toLowerCase();
+                var B = b.getElementsByTagName('td')[columnIndex].innerText.toLowerCase();
+                return A.localeCompare(B, 'es', { sensitivity: 'base' });
+            });
+            for (var i = 0; i < rows.length; i++) {
+                table.appendChild(rows[i]);
             }
         }
     </script>
 
 @endsection
-
-
