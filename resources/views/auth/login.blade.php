@@ -5,7 +5,7 @@
     <form class="max-w-sm mx-auto" method = "POST" action = "{{route('login')}}" novalidate>
         @csrf
         <div class="mb-7 flex items-center justify-center">
-            <a href="https://imgbb.com/" class="flex items-center justify-center">
+            <a href="{{route('loginForm')}}" class="flex items-center justify-center">
                 <img src="https://i.ibb.co/qBNsMDR/f653f8a2-5f7c-4959-82cf-17ac69e415c8.jpg" alt="f653f8a2-5f7c-4959-82cf-17ac69e415c8" border="0" class="w-52" />
             </a>
         </div>

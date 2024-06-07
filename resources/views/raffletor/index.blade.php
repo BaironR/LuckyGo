@@ -6,7 +6,7 @@
         <h1 class="font-bold text-5xl text-center mb-8">Listado de Sorteadores</h1>
 
         <div class="flex justify-center w-full my-5 mb-10">
-            <input type="text" id="searchInput" placeholder="Ingresar nombre o correo electrónico" onkeyup="searchTable()" class="w-3/4 p-2 text-lg">
+            <input type="text" id="searchInput" placeholder="Ingresar nombre o correo electrónico" onkeyup="searchTable()" class="w-full p-2 text-lg">
         </div>
 
         @if ($users->isEmpty())
