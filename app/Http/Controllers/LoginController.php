@@ -36,6 +36,11 @@ class LoginController extends Controller
 
         $user = auth()->user();
 
+        if ($user->status == 0) {
+            auth()->logout();
+            return back()->with('message', 'Usuario deshabilitado.');
+        }
+
         if ($user->is_admin && !$user->is_sorter) {
             return redirect()->route('raffletors');
 

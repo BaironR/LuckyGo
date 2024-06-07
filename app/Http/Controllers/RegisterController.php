@@ -50,6 +50,9 @@ class RegisterController extends Controller
                 'password' => $password,
             ]);
 
+            session(['username' => $request->name]);
+            session()->flash('registration_success', 'Usuario registrado exitosamente!');
+
             return redirect()->route('raffletors');
 
         } catch (Exception $e) {

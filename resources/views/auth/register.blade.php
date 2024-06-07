@@ -7,8 +7,8 @@
                 {{ session('error') }}
             </div>
         @endif
-            <form class="max-w-sm mx-auto" method = "POST" action = "{{route('registerCreate')}}" novalidate>
-                @csrf
+        <form id="registrationForm" class="max-w-sm mx-auto" method="POST" action="{{ route('registerCreate') }}" novalidate>
+            @csrf
 
             <div class="mb-5 flex items-center justify-center">
                 <a href="https://imgbb.com/" class="flex items-center justify-center">
@@ -40,8 +40,31 @@
                 <p class="bg-red-500 text-white my-2 rounded-lg text-lg text-center p-2">{{ $message }}</p>
                 @enderror
             </div>
-            <button type="submit" class="text-white bg-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-none text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full">Registrar sorteador</button>
+            <button type="button" class="text-white bg-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-none text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full" onclick="openConfirmModal()">Registrar sorteador</button>
         </form>
     </div>
-@endsection
 
+    <div id="confirmationModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75" style="display: none;">
+        <div class="bg-white p-5 rounded-lg shadow-lg max-w-md mx-auto">
+            <p class="text-lg font-semibold text-center">¿Estás seguro de que quieres añadir este sorteador?</p>
+            <div class="flex justify-center mt-5 space-x-4">
+                <button class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="confirmRegistration()">Sí</button>
+                <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600" onclick="closeConfirmModal()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openConfirmModal() {
+            document.getElementById('confirmationModal').style.display = 'flex';
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirmationModal').style.display = 'none';
+        }
+
+        function confirmRegistration() {
+            document.getElementById('registrationForm').submit();
+        }
+    </script>
+@endsection
