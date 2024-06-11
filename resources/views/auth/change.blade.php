@@ -1,4 +1,4 @@
-<!-- resources/views/auth/passwords/change.blade.php -->
+<!-- resources/views/auth/change.blade.php -->
 @extends('layouts.app')
 
 @section('content')
