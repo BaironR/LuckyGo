@@ -9,11 +9,6 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-//Funcion de cambio de contraseña
-    public function showChangePasswordForm()
-{
-    return view('auth.passwords.change');
-}
 
     /**
      * Display a listing of the resource.
