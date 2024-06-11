@@ -69,7 +69,7 @@
                 <p class="text-lg font-semibold text-center">¡Usuario registrado exitosamente!</p>
                 <p class="mt-4 text-center">El usuario {{ session('username') }} ha sido registrado correctamente.</p>
                 <div class="flex justify-center mt-5">
-                <a href="{{ route('cambiar.contrasena') }}">Cambiar Contraseña</a>
+            
                     <button class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="document.getElementById('successModal').style.display = 'none'">Cerrar</button>
                 </div>
             </div>
