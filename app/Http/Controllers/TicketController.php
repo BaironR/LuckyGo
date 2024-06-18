@@ -49,7 +49,8 @@ class TicketController extends Controller
                 'number_3' => $number_3,
                 'number_4' => $number_4,
                 'number_5' => $number_5,
-                'luck' => $luck
+                'luck' => $luck,
+                'is_winner' => false
             ]);
 
         } catch (ValidationException $e) {

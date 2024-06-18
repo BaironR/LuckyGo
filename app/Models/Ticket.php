@@ -24,6 +24,7 @@ class Ticket extends Model
         'number_3',
         'number_4',
         'number_5',
-        'luck'
+        'luck',
+        'is_winner'
     ];
 }
