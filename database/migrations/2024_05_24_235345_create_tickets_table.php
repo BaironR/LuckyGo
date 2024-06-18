@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('number_4');
             $table->integer('number_5');
             $table->boolean('luck');
+            $table->boolean('is_winner');
         });
     }
 
