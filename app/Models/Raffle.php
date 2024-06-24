@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ticket extends Model
+class Raffle extends Model
 {
     use HasFactory;
-
     public $timestamps = false;
 
     /**
@@ -17,15 +16,18 @@ class Ticket extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'id',
-        'date',
-        'number_1',
-        'number_2',
-        'number_3',
-        'number_4',
-        'number_5',
-        'luck',
-        'is_winner',
-        'date_raffle'
+        'date_raffle',
+        'number_of_tickets',
+        'total',
+        'total_luck',
+        'subtotal_of_tickets',
+        'status_raffle',
+        'luck_raffle',
+        'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

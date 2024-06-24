@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tickets', function (Blueprint $table) {
-            $table->string('id')->unique();
+            $table->string('id')->primary();
             $table->date('date');
             $table->integer('number_1');
             $table->integer('number_2');
@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('number_5');
             $table->boolean('luck');
             $table->boolean('is_winner');
+            $table->date('date_raffle');
+            $table->foreign('date_raffle')->references('date_raffle')->on('raffles')->onDelete('cascade');
         });
     }
 

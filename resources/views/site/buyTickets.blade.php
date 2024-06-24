@@ -9,7 +9,6 @@
                     <img src="https://i.ibb.co/qBNsMDR/f653f8a2-5f7c-4959-82cf-17ac69e415c8.jpg" alt="LuckyGo" border="0" class="w-44" />
                 </a>
             </div>
-            <a href="{{ route('index') }}" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">LISTADO SORTEOS ACCESO TEMPORAL</a>
             <div class="title text-2xl font-bold mb-5">
                 Compra de billetes de lotería
             </div>
