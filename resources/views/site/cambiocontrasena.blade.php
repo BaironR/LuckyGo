@@ -49,18 +49,25 @@
         .error {
             color: #f56558;
             margin-bottom: 10px;
+
         }
+        .error ul {
+            padding: 0;
+            list-style: none;
+        }
+
     </style>
     <script>
         function validateForm() {
+            const currentPassword = document.getElementById("current-password").value;
             const newPassword = document.getElementById("new-password").value;
             const confirmPassword = document.getElementById("confirm-password").value;
             const errorMessage = document.getElementById("error-message");
 
             errorMessage.textContent = "";
 
-            if (newPassword === "" || confirmPassword === "") {
-                errorMessage.textContent = "Debe completar ambos campos asociados a la contraseña";
+            if (currentPassword === "" || newPassword === "" || confirmPassword === "") {
+                errorMessage.textContent = "Debe completar todos los campos asociados a la contraseña";
                 return false;
             }
 
@@ -74,22 +81,32 @@
                 return false;
             }
 
-            // If the validation passes, proceed with form submission
-            alert("Contraseña cambiada exitosamente. Por favor, inicie sesión con su nueva contraseña.");
+            // Si la validación es exitosa, se procede con el envío del formulario
             return true;
         }
     </script>
 </head>
 <body>
-    <div class="container">
-        <img src="https://i.ibb.co/qBNsMDR/f653f8a2-5f7c-4959-82cf-17ac69e415c8.jpg" alt="Lucky Go">
-        <h1>Cambiar Contraseña</h1>
-        <div id="error-message" class="error"></div>
-        <form onsubmit="return validateForm()">
-            <input type="password" id="new-password" placeholder="Nueva contraseña">
-            <input type="password" id="confirm-password" placeholder="Confirmar nueva contraseña">
-            <button type="submit">Cambiar Contraseña</button>
-        </form>
-    </div>
+<div class="container">
+    <img src="https://i.ibb.co/qBNsMDR/f653f8a2-5f7c-4959-82cf-17ac69e415c8.jpg" alt="Lucky Go">
+    <h1>Cambiar Contraseña</h1>
+    <div id="error-message" class="error"></div>
+    @if ($errors->any())
+        <div class="error">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <form action="{{ route('changePassword') }}" method="POST" onsubmit="return validateForm()">
+        @csrf
+        <input type="password" id="current-password" name="current_password" placeholder="Contraseña actual">
+        <input type="password" id="new-password" name="new_password" placeholder="Nueva contraseña">
+        <input type="password" id="confirm-password" name="new_password_confirmation" placeholder="Confirmar nueva contraseña">
+        <button type="submit">Cambiar Contraseña</button>
+    </form>
+</div>
 </body>
 </html>

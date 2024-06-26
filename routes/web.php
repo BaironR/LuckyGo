@@ -23,6 +23,11 @@ Route::get('/iniciar-sesion', [LoginController::class, 'loginForm'])->name('logi
 Route::post('/iniciar-sesion', [LoginController::class, 'login'])->name('login');
 Route::get('/cerrar-sesion', [LogoutController::class, 'logout'])->name('logout');
 
+// Cambiar Contraseña
+Route::middleware('auth')->group(function() {
+    Route::get('/change-password', [UserController::class, 'ChangePasswordForm'])->name('changePasswordForm');
+    Route::post('/change-password', [UserController::class, 'changePassword'])->name('changePassword');
+});
 // Registro
 
 // Validar autenticación al ingresar url
