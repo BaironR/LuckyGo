@@ -34,12 +34,14 @@
                             <td class="text-center p-3 px-5">{{ $raffle->total }}</td>
                             <td class="text-center p-3 px-5">
                             @if ($raffle->status_raffle == 0)
+                                Abierto
+                            @elseif ($raffle->status_raffle == 1)
                                     <div class="flex items-center">
                                         <span class="mr-2">No realizado</span>
-                                        <button type="button" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Ingresar</button>
+                                        <form id="enterNumbers" class="max-w-sm mx-auto" method="GET" action="{{ route('enterNumbersForm', ['date_raffle' => $raffle->date_raffle]) }}" novalidate>
+                                            <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Ingresar</button>
+                                        </form>
                                     </div>
-                            @elseif ($raffle->status_raffle == 1)
-                                Abierto
                             @elseif ($raffle->status_raffle == 2)
                                 Realizado
                             @else

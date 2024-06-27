@@ -30,5 +30,7 @@ Route::middleware('auth')->group(callback: function(){
     Route::get('/registrar', [RegisterController::class, 'registerForm'])->name('registerForm');
     Route::get('/raffletors', [UserController::class, 'index'])->name('raffletors');
     Route::get('/ingresar-sorteos', [RaffleController::class, 'index'])->name('enterRaffle');
+    Route::get('/numeros-ganadores/{date_raffle}', [RaffleController::class, 'enterNumbersForm'])->name('enterNumbersForm');
+    Route::post('/numeros-ganadores/{date_raffle}', [RaffleController::class, 'enterNumbers'])->name('enterNumbers');
     Route::post('/actualizar-estado/{id}', [UserController::class, 'updateStatus'])->name('updateStatus');
 });

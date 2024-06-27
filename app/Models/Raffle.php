@@ -9,6 +9,9 @@ class Raffle extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $primaryKey = 'date_raffle';
+    public $incrementing = false;
+    protected $keyType = 'date';
 
     /**
      * The attributes that are mass assignable.
