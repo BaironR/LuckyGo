@@ -41,6 +41,10 @@
                             <a href="{{route('buyTickets')}}"
                                class="block py-2 px-3 text-blue-600 rounded hover:bg-blue-600 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Comprar billetes</a>
                         </li>
+                        <ul class="flex justify-end space-x-4">
+            <li>
+                <a href="{{ url('/verificarbillete') }}" class="text-blue-500">Verificar billete</a>
+            </li>
 
                 @endguest
 
