@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->integer('age')->nullable();
-            $table->integer('raffles_entered');
+            $table->integer('raffles_entered')->nullable();
             $table->boolean('status');
             $table->boolean('is_admin');
             $table->boolean('is_sorter');

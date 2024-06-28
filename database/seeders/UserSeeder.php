@@ -19,9 +19,9 @@ class UserSeeder extends Seeder
             'name'=> 'Antonio Barraza Guzmán',
             'email' => 'antonio.barraza.guzman@gmail.com',
             'password' => Hash::make('Luckygo23'),
-            'age' => 0,
-            'raffles_entered' => 0,
-            'status' => true,
+            'age' => null,
+            'raffles_entered' => null,
+            'status' => 1,
             'is_admin' => true,
             'is_sorter' => false
         ]);

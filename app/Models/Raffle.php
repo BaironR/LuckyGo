@@ -11,13 +11,8 @@ class Raffle extends Model
     public $timestamps = false;
     protected $primaryKey = 'date_raffle';
     public $incrementing = false;
-    protected $keyType = 'date';
+    protected $keyType = 'string'; // Cambiar a 'string' porque 'date' no es un tipo de clave válido en Laravel
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'date_raffle',
         'number_of_tickets',
@@ -32,5 +27,15 @@ class Raffle extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function winnerNumbers()
+    {
+        return $this->hasMany(WinnerNumbers::class, 'date_raffle', 'date_raffle');
+    }
+
+    public function luckWinnerNumbers()
+    {
+        return $this->hasMany(LuckWinnerNumbers::class, 'date_raffle', 'date_raffle');
     }
 }

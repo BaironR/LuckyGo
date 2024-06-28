@@ -65,6 +65,8 @@
 
                 document.getElementById('suerteNumbers').textContent = sortedTendreSuerte.join(' - ');
                 document.getElementById('sorteoNumbers').textContent = sortedSorteos.join(' - ');
+                document.getElementById('tendreSuerteSelectedForm').value = sortedTendreSuerte.join(',');
+                document.getElementById('sorteosSelectedForm').value = sortedSorteos.join(',');
                 document.querySelector('.modal').classList.remove('hidden');
 
                 @else
@@ -75,6 +77,7 @@
                 let sortedSorteos = sorteosSelected.map(element => parseInt(element.textContent)).sort((a, b) => a - b);
 
                 document.getElementById('sorteoNumbers').textContent = sortedSorteos.join(' - ');
+                document.getElementById('sorteosSelectedForm').value = sortedSorteos.join(',');
                 document.querySelector('.modal').classList.remove('hidden');
                 @endif
             });
@@ -139,10 +142,12 @@
             @endif
             <p><strong>¿Deseas Registrar Sorteo?</strong></p>
             <div class="modal-buttons flex justify-center gap-8 mt-4">
-                <form method="POST" action="{{ route('enterNumbers', $raffle) }}" id="enterNumbersForm">
+                <form method="POST" action="{{ route('enterNumbers', $raffle->date_raffle) }}" id="enterNumbersForm">
                     @csrf
-                    <input type="hidden" name="selected_numbers_luck" id="tendreSuerteSelectedForm">
-                    <input type="hidden" name="selected_numbers" id="sorteosSelectedForm">
+                    @if ($raffle->luck_raffle)
+                        <input type="hidden" name="luck_numbers" id="tendreSuerteSelectedForm">
+                    @endif
+                    <input type="hidden" name="raffle_numbers" id="sorteosSelectedForm">
                     <button class="modal-button btn confirm bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded" onclick="confirmEnterNumbers()">Confirmar</button>
                 </form>
                 <button class="btn cancel bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Cancelar</button>
