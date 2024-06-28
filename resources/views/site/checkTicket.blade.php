@@ -4,116 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificador de Billetes</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #2ECC71;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #000;
-        }
-        .container {
-            width: 60%;
-            margin: 0 auto;
-            border: 1px solid #000;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: #000;
-        }
-        table {
-            width: 100%;
-            margin-bottom: 20px;
-            border-collapse: collapse;
-            color: #000;
-        }
-        th, td {
-            border: 1px solid #000;
-            padding: 10px;
-            text-align: center;
-            color: #000;
-        }
         .highlight {
-            color: #000;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        h1, h2 {
-            color: #000;
-            text-align: center;
-        }
-        form {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #000;
-        }
-        input[type="text"] {
-            padding: 10px;
-            font-size: 1em;
-            margin-right: 10px;
-            color: #000;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 1em;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
+            @apply text-xl font-bold text-center;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Verificador de Billetes</h1>
-        <form>
-            <label for="codigo">Ingresa el código de tu billete: </label>
-            <input type="text" id="codigo" name="codigo">
-            <button type="button" onclick="verificarBillete()">Verificar</button>
+<body style="background-color: #2ECC71;" class="flex items-center justify-center h-screen">
+    <div class="container mx-auto bg-white shadow-lg rounded-lg p-8 relative">
+        <a href="{{ url('URL_A_LA_QUE_DEREAS_VOLVER') }}" class="absolute top-4 right-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-green-600">Volver</a>
+        <h1 class="text-3xl font-bold text-center mb-4">Verificador de Billetes</h1>
+        <form class="text-center mb-6">
+            <label for="codigo" class="block text-lg mb-2">Ingresa el código de tu billete:</label>
+            <input type="text" id="codigo" name="codigo" class="border border-gray-300 rounded px-4 py-2 mb-4">
+            <button type="button" onclick="verificarBillete()" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-red-600">Verificar</button>
         </form>
         <div id="result">
-            <h2>Detalles de tu Billete</h2>
-            <table>
+            <h2 class="text-2xl font-bold text-center mb-4">Detalles de tu Billete</h2>
+            <table class="w-full mb-4 border-collapse border border-gray-300">
                 <tr>
-                    <th>Fecha del Billete</th>
-                    <th>Números Jugados</th>
+                    <th class="border border-gray-300 px-4 py-2">Fecha del Billete</th>
+                    <th class="border border-gray-300 px-4 py-2">Números Jugados</th>
                 </tr>
                 <tr>
-                    <td id="fechaBillete">18/03/2024 15:40:21</td>
-                    <td id="numerosJugados">12 19 20 21 29</td>
-                </tr>
-            </table>
-            <h2>Detalles del Sorteo</h2>
-            <table>
-                <tr>
-                    <th>Fecha del Sorteo</th>
-                    <th>Números Ganadores</th>
-                    <th>Números Ganadores "Tendré Suerte"</th>
-                </tr>
-                <tr>
-                    <td id="fechaSorteo">18/03/2024 00:34</td>
-                    <td id="numerosGanadores">12 19 20 21 29</td>
-                    <td id="numerosTendreSuerte">3 8 15 22 27</td>
+                    <td id="fechaBillete" class="border border-gray-300 px-4 py-2">18/03/2024 15:40:21</td>
+                    <td id="numerosJugados" class="border border-gray-300 px-4 py-2">12 19 20 21 29</td>
                 </tr>
             </table>
-            <p id="premio" class="highlight">¡Tienes premio!</p>
-            <table>
+            <h2 class="text-2xl font-bold text-center mb-4">Detalles del Sorteo</h2>
+            <table class="w-full mb-4 border-collapse border border-gray-300">
                 <tr>
-                    <th>Sorteo principal</th>
-                    <th>"Tendré Suerte"</th>
+                    <th class="border border-gray-300 px-4 py-2">Fecha del Sorteo</th>
+                    <th class="border border-gray-300 px-4 py-2">Números Ganadores</th>
+                    <th class="border border-gray-300 px-4 py-2">Números Ganadores "Tendré Suerte"</th>
                 </tr>
                 <tr>
-                    <td id="premioPrincipal">$400.000</td>
-                    <td id="premioTendreSuerte">Sin Premio</td>
+                    <td id="fechaSorteo" class="border border-gray-300 px-4 py-2">18/03/2024 00:34</td>
+                    <td id="numerosGanadores" class="border border-gray-300 px-4 py-2">12 19 20 21 29</td>
+                    <td id="numerosTendreSuerte" class="border border-gray-300 px-4 py-2">3 8 15 22 27</td>
+                </tr>
+            </table>
+            <p id="premio" class="highlight text-green-600">¡Tienes premio!</p>
+            <table class="w-full mt-4 border-collapse border border-gray-300">
+                <tr>
+                    <th class="border border-gray-300 px-4 py-2">Sorteo principal</th>
+                    <th class="border border-gray-300 px-4 py-2">"Tendré Suerte"</th>
+                </tr>
+                <tr>
+                    <td id="premioPrincipal" class="border border-gray-300 px-4 py-2">$400.000</td>
+                    <td id="premioTendreSuerte" class="border border-gray-300 px-4 py-2">Sin Premio</td>
                 </tr>
             </table>
         </div>
