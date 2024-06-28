@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('id', '!=', 1)->get();
-        return view('raffletor.index', compact('users'));
+        return view('raffletor.raffletorList', compact('users'));
     }
 
     public function updateStatus(Request $request, $id)
