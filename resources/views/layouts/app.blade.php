@@ -12,6 +12,7 @@
 <body>
 
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
+   
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
         </a>
@@ -33,6 +34,12 @@
                 @endauth
 
                 @guest
+                <ul class="flex justify-end space-x-4">
+            <li>
+                <a href="{{ url('/verificarbillete') }}" class="text-blue-500">Verificar billete</a>
+            </li>
+            <!-- ... otros enlaces de navegación ... -->
+        </ul>
                         <li>
                             <a href="{{route('loginForm')}}"
                                class="block py-2 px-3 text-blue-600 rounded hover:bg-blue-600 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Iniciar sesión</a>
