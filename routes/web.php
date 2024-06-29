@@ -8,14 +8,13 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', function () {
     return view(view: 'site.buyTickets');
 });
 
-Route::get('/verificar-billete', function () {
-    return view('site.checkTicket');
-})->name('checkTicket');
+Route::post('/tickets', [TicketController::class, 'store']);
+
+
 
 // Ruta página de venta de billetes
 Route::get('/comprar-billete', [PageController::class, 'buyTickets'])->name('buyTickets');
