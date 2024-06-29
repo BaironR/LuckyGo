@@ -21,6 +21,7 @@ class Raffle extends Model
         'subtotal_of_tickets',
         'status_raffle',
         'luck_raffle',
+        'entered_date',
         'user_id'
     ];
 

@@ -57,6 +57,7 @@ class TicketController extends Controller
                 'subtotal_of_tickets' => $subtotalOfTickets,
                 'status_raffle' => 0,
                 'luck_raffle' => $luck,
+                'entered_date' => null,
                 'user_id' => null,
             ]);
         } else {

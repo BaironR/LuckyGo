@@ -49,7 +49,7 @@
                             @endif
                             </td>
 
-                            <td class="text-center p-3 px-5">{{ $raffle->user_id ? $raffle->user->name : '' }}</td>
+                            <td class="text-center p-3 px-5">{{ $raffle->user_id ? $raffle->user->name.' '.$raffle->entered_date : '' }}</td>
                         </tr>
                     @endforeach
                 </tbody>

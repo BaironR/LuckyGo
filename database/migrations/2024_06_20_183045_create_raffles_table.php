@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('subtotal_of_tickets');
             $table->integer('status_raffle');
             $table->boolean('luck_raffle');
+            $table->string('entered_date')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

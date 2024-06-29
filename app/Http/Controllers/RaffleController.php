@@ -17,7 +17,7 @@ class RaffleController extends Controller
 
             $raffleSunday = $raffle->date_raffle;
 
-            if ($currentDate->greaterThan($raffleSunday) && $raffle->status == 0) {
+            if ($currentDate->greaterThan($raffleSunday) && $raffle->status_raffle == 0) {
                 $raffle->status_raffle = 1;
                 $raffle->save();
             }
@@ -36,6 +36,7 @@ class RaffleController extends Controller
 
         $raffle = Raffle::find($date_raffle);
         $user = auth()->user();
+        $entered_date = Carbon::now()->setTimezone('America/Santiago')->format('d/m/Y H:i');
 
         if($raffle->luck_raffle){
             $raffleNumbers = $request->input('raffle_numbers');
@@ -74,9 +75,6 @@ class RaffleController extends Controller
                 ['luck_winner_number' => $number_10]
             ]);
 
-            $raffle->status_raffle = 2;
-            $raffle->save();
-
         } else {
             $raffleNumbers = $request->input('raffle_numbers');
             // Separar los números por el separador ',' para obtener un array de números
@@ -95,9 +93,13 @@ class RaffleController extends Controller
                 ['winner_number' => $number_4],
                 ['winner_number' => $number_5]
             ]);
-
-            $raffle->status_raffle = 2;
-            $raffle->save();
         }
+
+        $raffle->user_id = $user->id;
+        $raffle->status_raffle = 2;
+        $raffle->entered_date = $entered_date;
+        $raffle->save();
+        $user->raffles_entered = $user->raffles_entered + 1;
+        $user->save();
     }
 }

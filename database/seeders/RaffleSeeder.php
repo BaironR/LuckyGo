@@ -22,6 +22,7 @@ class RaffleSeeder extends Seeder
             'subtotal_of_tickets' => 2000,
             'status_raffle' => 0,
             'luck_raffle' => true,
+            'entered_date' => null,
             'user_id' => null
         ]);
         DB::table('raffles')->insert([
@@ -33,6 +34,7 @@ class RaffleSeeder extends Seeder
             'subtotal_of_tickets' => 2000,
             'status_raffle' => 0,
             'luck_raffle' => false,
+            'entered_date' => null,
             'user_id' => null
         ]);
 
