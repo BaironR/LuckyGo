@@ -40,7 +40,7 @@
                             <td class="text-left p-3 px-5">{{ $user->age }}</td>
                             <td class="text-left p-3 px-5">{{ $user->raffles_entered }}</td>
                             <td>
-                                <form action="{{ route('updateStatus', $user->id) }}" method="POST">
+                                <form action="{{ route('updateStatus', $user->id) }}" method="POST" novalidate>
                                     @csrf
                                     @method('POST')
                                     <select name="status" class="status-dropdown p-2 border rounded" onchange="this.form.submit()">

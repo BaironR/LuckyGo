@@ -1,56 +1,23 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cambiar Contraseña - Lucky Go</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #2ECC71;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        img {
-            width: 100px;
-            margin-bottom: 20px;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .error {
-            color: #f56558;
-            margin-bottom: 10px;
-        }
-    </style>
+@extends('layouts.app')
+
+@section('content')
+    <div class="flex items-center justify-center min-h-screen bg-gray-100">
+        <div class="bg-white p-20 rounded-lg shadow-md text-center w-full max-w-2xl">
+            <img src="https://i.ibb.co/qBNsMDR/f653f8a2-5f7c-4959-82cf-17ac69e415c8.jpg" alt="Lucky Go" class="w-40 mx-auto mb-4">
+            <h1 class="text-3xl font-bold mb-6">Cambiar Contraseña</h1>
+            <div id="error-message" class="text-red-500 mb-4"></div>
+            <form method="POST" action="{{ route('changePassword') }}" onsubmit="return validateForm()">
+                @csrf
+                <input type="password" name="new-password" id="new-password" placeholder="Nueva contraseña" class="w-full p-3 mb-3 border border-gray-300 rounded-lg">
+                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirmar nueva contraseña" class="w-full p-3 mb-3 border border-gray-300 rounded-lg">
+                <div class="flex justify-between">
+                    <button type="submit" class="w-2/5 text-white p-3 rounded-lg hover:bg-green-700" style="background-color: #2ECC71">Cambiar Contraseña</button>
+                    <a href="{{ route('enterRaffle') }}" class="w-2/5 text-white p-3 rounded-lg hover:bg-red-600" style="background-color: #f6686b">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         function validateForm() {
             const newPassword = document.getElementById("new-password").value;
@@ -75,21 +42,13 @@
             }
 
             // If the validation passes, proceed with form submission
-            alert("Contraseña cambiada exitosamente. Por favor, inicie sesión con su nueva contraseña.");
+            alert("Contraseña cambiada exitosamente.");
             return true;
         }
+
+        function cancelOperation() {
+            // Aquí puedes redirigir a otra página o simplemente hacer algo como cerrar un modal, etc.
+            alert("Operación cancelada");
+        }
     </script>
-</head>
-<body>
-    <div class="container">
-        <img src="https://i.ibb.co/qBNsMDR/f653f8a2-5f7c-4959-82cf-17ac69e415c8.jpg" alt="Lucky Go">
-        <h1>Cambiar Contraseña</h1>
-        <div id="error-message" class="error"></div>
-        <form onsubmit="return validateForm()">
-            <input type="password" id="new-password" placeholder="Nueva contraseña">
-            <input type="password" id="confirm-password" placeholder="Confirmar nueva contraseña">
-            <button type="submit">Cambiar Contraseña</button>
-        </form>
-    </div>
-</body>
-</html>
+@endsection

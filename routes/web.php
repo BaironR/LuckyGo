@@ -37,4 +37,6 @@ Route::middleware('auth')->group(callback: function(){
     Route::get('/numeros-ganadores/{date_raffle}', [RaffleController::class, 'enterNumbersForm'])->name('enterNumbersForm');
     Route::post('/numeros-ganadores/{date_raffle}', [RaffleController::class, 'enterNumbers'])->name('enterNumbers');
     Route::post('/actualizar-estado/{id}', [UserController::class, 'updateStatus'])->name('updateStatus');
+    Route::get('/cambiar-contraseña', [UserController::class, 'changePasswordForm'])->name('changePasswordForm');
+    Route::post('/cambiar-contraseña', [UserController::class, 'changePassword'])->name('changePassword');
 });
