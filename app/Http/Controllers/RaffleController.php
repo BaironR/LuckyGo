@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class RaffleController extends Controller
 {
+
     public function index(){
         $raffles = Raffle::all();
 
@@ -101,5 +102,7 @@ class RaffleController extends Controller
         $raffle->save();
         $user->raffles_entered = $user->raffles_entered + 1;
         $user->save();
+
+        return redirect()->route('enterRaffle');
     }
 }

@@ -25,7 +25,7 @@
             <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
 
                 @auth
-            
+
                     <li>
                         <a href="{{route('logout')}}"
                            class="block py-2 px-3 text-blue-600 rounded hover:bg-blue-600 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Cerrar sesión</a>
@@ -41,10 +41,7 @@
                             <a href="{{route('buyTickets')}}"
                                class="block py-2 px-3 text-blue-600 rounded hover:bg-blue-600 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Comprar billetes</a>
                         </li>
-                        <li>
-                        <a href="{{route('checkTicket')}}"
-                         class="block py-2 px-3 text-blue-600 rounded hover:bg-blue-600 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Verificar billete</a>
-                    </li>
+
                 @endguest
 
             </ul>
