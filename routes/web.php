@@ -12,6 +12,9 @@ Route::get('/', function () {
     return view(view: 'site.buyTickets');
 });
 
+Route::post('/tickets', [TicketController::class, 'store']);
+
+
 // Ruta página de venta de billetes
 Route::get('/comprar-billete', [PageController::class, 'buyTickets'])->name('buyTickets');
 Route::post('/comprar-billete', [TicketController::class, 'store'])->name('buyTicket');
