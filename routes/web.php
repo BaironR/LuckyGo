@@ -3,7 +3,6 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\RaffleController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
@@ -13,8 +12,12 @@ Route::get('/', function () {
     return view(view: 'site.buyTickets');
 });
 
+Route::post('/tickets', [TicketController::class, 'store']);
+
+
+
 // Ruta página de venta de billetes
-Route::get('/comprar-billete', [TicketController::class, 'buyTickets'])->name('buyTickets');
+Route::get('/comprar-billete', [PageController::class, 'buyTickets'])->name('buyTickets');
 Route::post('/comprar-billete', [TicketController::class, 'store'])->name('buyTicket');
 
 // Login y logout de usuarios
@@ -29,8 +32,6 @@ Route::middleware('auth')->group(callback: function(){
     Route::post('/registrar', [RegisterController::class, 'registerCreate'])->name('registerCreate');
     Route::get('/registrar', [RegisterController::class, 'registerForm'])->name('registerForm');
     Route::get('/raffletors', [UserController::class, 'index'])->name('raffletors');
-    Route::get('/ingresar-sorteos', [RaffleController::class, 'index'])->name('enterRaffle');
-    Route::get('/numeros-ganadores/{date_raffle}', [RaffleController::class, 'enterNumbersForm'])->name('enterNumbersForm');
-    Route::post('/numeros-ganadores/{date_raffle}', [RaffleController::class, 'enterNumbers'])->name('enterNumbers');
+    Route::get('/ingresar-sorteos', [PageController::class, 'page'])->name('enterRaffle');
     Route::post('/actualizar-estado/{id}', [UserController::class, 'updateStatus'])->name('updateStatus');
 });
