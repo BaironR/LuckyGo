@@ -55,7 +55,7 @@ class TicketSeeder extends Seeder
             'luck' => false,
             'is_winner' => false,
             'is_luck_winner' => false,
-            'date_raffle' => '2024-06-16'
+            'date_raffle' => '2024-06-23'
         ]);
     }
 }
