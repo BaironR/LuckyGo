@@ -27,10 +27,10 @@
             background: #0a74da;
             color: white;
             border: none;
-            padding: 5px 10px; /* Adjust padding to make the button smaller */
-            font-size: 16px; /* Adjust font size to make the button smaller */
+            padding: 5px 10px;
+            font-size: 16px;
             cursor: pointer;
-            border-radius: 5px; /* Optional: add some border radius for styling */
+            border-radius: 5px;
         }
 
         .sidebar h2 {
@@ -59,20 +59,13 @@
         .sidebar ul li a:hover {
             color: #0a74da;
         }
-
-        table,
-        th,
-        td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
     </style>
 
     <div class="sidebar hidden" id="sidebar">
         <h2>Cambiar datos del sorteador</h2>
         <ul>
-            <li><a href={{ route('changePasswordForm') }}>Cambiar contraseña</a></li>
-            <li><a href={{ route('editProfileForm') }}>Cambiar datos</a></li>
+            <li><a href="{{ route('changePasswordForm') }}">Cambiar contraseña</a></li>
+            <li><a href="{{ route('editProfileForm') }}">Cambiar datos</a></li>
         </ul>
     </div>
     <div class="main-content">
@@ -90,23 +83,23 @@
 
         <h1 class="font-bold text-5xl text-center mb-8">Listado de Sorteos</h1>
 
-        <div>
-            <table class="w-full text-md bg-white shadow-md rounded mb-4" id="sorteosTable">
+        <div class="overflow-x-auto">
+            <table class="w-full text-md bg-white shadow-md rounded mb-4">
                 <thead>
-                <tr>
-                    <th class="text-middle bg-gray-400 p-3 px-5">Fecha de Sorteo</th>
-                    <th class="text-middle bg-gray-400 p-3 px-5">Cantidad de Billetes</th>
-                    <th class="text-middle bg-gray-400 p-3 px-5">Subtotal de Billetes</th>
-                    <th class="text-middle bg-gray-400 p-3 px-5">"Tendre Suerte"</th>
-                    <th class="text-middle bg-gray-400 p-3 px-5">Total</th>
-                    <th class="text-middle bg-gray-400 p-3 px-5">Estado</th>
-                    <th class="text-middle bg-gray-400 p-3 px-5">Ingresado por: </th>
+                <tr class="bg-green-500 text-white shadow-md rounded">
+                    <th class="text-middle p-3 px-5">Fecha de Sorteo</th>
+                    <th class="text-middle p-3 px-5">Cantidad de Billetes</th>
+                    <th class="text-middle p-3 px-5">Subtotal de Billetes</th>
+                    <th class="text-middle p-3 px-5">"Tendre Suerte"</th>
+                    <th class="text-middle p-3 px-5">Total</th>
+                    <th class="text-middle p-3 px-5">Estado</th>
+                    <th class="text-middle p-3 px-5">Ingresado por: </th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($raffles as $raffle)
-                    <tr>
-                        <td class="text-center p-3 px-5">{{ $raffle->date_raffle}}</td>
+                    <tr class="hover:bg-gray-100 border-b border-gray-200">
+                        <td class="text-center p-3 px-5">{{ $raffle->date_raffle }}</td>
                         <td class="text-center p-3 px-5">{{ $raffle->number_of_tickets }}</td>
                         <td class="text-center p-3 px-5">{{ $raffle->subtotal_of_tickets }}</td>
                         <td class="text-center p-3 px-5">{{ $raffle->total_luck }}</td>
@@ -115,7 +108,7 @@
                             @if ($raffle->status_raffle == 0)
                                 Abierto
                             @elseif ($raffle->status_raffle == 1)
-                                <div class="flex items-center">
+                                <div class="flex items-center justify-center">
                                     <span class="mr-2">No realizado</span>
                                     <form id="enterNumbers" class="max-w-sm mx-auto" method="GET"
                                           action="{{ route('enterNumbersForm', ['date_raffle' => $raffle->date_raffle]) }}"
@@ -130,12 +123,10 @@
                                 <span style="color: red;">Error: Estado desconocido</span>
                             @endif
                         </td>
-
                         <td class="text-center p-3 px-5">{{ $raffle->user_id ? $raffle->user->name.' '.$raffle->entered_date : '' }}</td>
                     </tr>
                 @endforeach
                 </tbody>
-
             </table>
         </div>
     </div>
