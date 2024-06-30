@@ -72,7 +72,7 @@
         <h2>Cambiar datos del sorteador</h2>
         <ul>
             <li><a href={{ route('changePasswordForm') }}>Cambiar contraseña</a></li>
-            <li><a href="#">Cambiar datos</a></li>
+            <li><a href={{ route('editProfileForm') }}>Cambiar datos</a></li>
         </ul>
     </div>
     <div class="main-content">
