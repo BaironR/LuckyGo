@@ -45,4 +45,6 @@ Route::middleware('auth')->group(callback: function(){
     Route::post('/actualizar-estado/{id}', [UserController::class, 'updateStatus'])->name('updateStatus');
     Route::get('/cambiar-contraseña', [UserController::class, 'changePasswordForm'])->name('changePasswordForm');
     Route::post('/cambiar-contraseña', [UserController::class, 'changePassword'])->name('changePassword');
+    Route::get('/editar-perfil', [UserController::class, 'editProfileForm'])->name('editProfileForm');
+    Route::post('/editar-perfil', [UserController::class, 'updateProfile'])->name('updateProfile');
 });
