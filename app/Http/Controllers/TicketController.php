@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Raffle;
 use App\Models\Ticket;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -12,9 +13,24 @@ use Carbon\Carbon;
 
 class TicketController extends Controller
 {
+    public function checkTicket(Request $request)
+    {
+        try {
+            $ticket = Ticket::findOrFail($request->id);
+            return view('site.checkTicket', compact('ticket'));
+
+        } catch (ModelNotFoundException $e) {
+            // Manejo de la excepción si no se encuentra el ticket
+            return redirect()->back()->withErrors(['msg' => 'No se encontró el ticket con el ID proporcionado.']);
+        }
+    }
 
     public function buyTickets(){
         return view('site.buyTickets');
+    }
+
+    public function viewTicket(){
+        return view('site.searchTicket');
     }
 
     public function store(Request $request)
@@ -23,7 +39,7 @@ class TicketController extends Controller
         $luck = $request->input('luck') == 1;
         $id = $request->input('id');
         // Obtener la fecha enviada en el request y convertirla al formato YYYY-MM-DD
-        $date = date('Y-m-d', strtotime(str_replace('/', '-', $request->input('purchase_date'))));
+        $date = date('Y-m-d H:i', strtotime(str_replace('/', '-', $request->input('purchase_date'))));
 
         // Obtener los números enviados en el request
         $selectedNumbers = $request->input('selected_numbers');
@@ -39,7 +55,7 @@ class TicketController extends Controller
         $number_5 = (int)$numbersArray[4];
 
         // Verificar si existe un sorteo para el domingo más próximo a la fecha 'date'
-        $nextSunday = Carbon::parse($date)->next(Carbon::SUNDAY);
+        $nextSunday = Carbon::parse($date)->next(Carbon::SUNDAY)->format('Y-m-d H:i');
         $existingRaffle = Raffle::where('date_raffle', $nextSunday)->first();
 
         if (!$existingRaffle) {
@@ -97,6 +113,7 @@ class TicketController extends Controller
                 'number_5' => $number_5,
                 'luck' => $luck,
                 'is_winner' => false,
+                'is_luck_winner' => false,
                 'date_raffle' => $nextSunday
             ]);
 

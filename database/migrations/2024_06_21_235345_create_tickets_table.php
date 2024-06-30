@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('number_5');
             $table->boolean('luck');
             $table->boolean('is_winner');
+            $table->boolean('is_luck_winner');
             $table->date('date_raffle');
             $table->foreign('date_raffle')->references('date_raffle')->on('raffles')->onDelete('cascade');
         });

@@ -3,6 +3,7 @@
 @section('content')
 
     <div class="bg-green-200 text-center min-h-screen flex flex-col items-center">
+        <a href="{{ route('viewTicket') }}" id="viewTicketButton">Revisar ticket</a>
         <div class="container mx-auto mt-10 p-5 bg-white rounded-lg shadow-lg max-w-md">
             <div class="mb-5 flex items-center justify-center">
                 <a href="https://imgbb.com/" class="flex items-center justify-center">
@@ -81,6 +82,22 @@
             border-color: #2ECC71;
             color: white;
         }
+        #viewTicketButton {
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            z-index: 1000;
+            background-color: #0a74da;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #viewTicketButton:hover {
+            background-color: #095c9d;
+        }
     </style>
 
     <script>
@@ -146,7 +163,17 @@
             closeModal();
 
             const id = 'LG' + (Math.floor(Math.random() * 899) + 100) // Genera un número de billete único
-            const purchase_date = new Date().toLocaleString();
+
+            const options = {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false  // Formato de 24 horas
+            };
+
+            const purchase_date = new Date().toLocaleString('es-ES', options);
             document.getElementById('formTicketNumber').value = id;
             document.getElementById('formPurchaseDate').value = purchase_date;
         }

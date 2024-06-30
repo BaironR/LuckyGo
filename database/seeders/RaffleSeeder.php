@@ -16,7 +16,7 @@ class RaffleSeeder extends Seeder
         DB::table('raffles')->insert([
 
             'date_raffle'=> '2024-06-16',
-            'number_of_tickets' => 1,
+            'number_of_tickets' => 2,
             'total' => 3000,
             'total_luck' => 1000,
             'subtotal_of_tickets' => 2000,

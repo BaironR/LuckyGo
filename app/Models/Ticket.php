@@ -26,6 +26,11 @@ class Ticket extends Model
         'number_5',
         'luck',
         'is_winner',
+        'is_luck_winner',
         'date_raffle'
     ];
+    public function raffle()
+    {
+        return $this->belongsTo(Raffle::class, 'date_raffle');
+    }
 }

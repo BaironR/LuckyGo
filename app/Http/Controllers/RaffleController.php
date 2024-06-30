@@ -12,7 +12,7 @@ class RaffleController extends Controller
     public function index(){
         $raffles = Raffle::all();
 
-        $currentDate = Carbon::now();
+        $currentDate = Carbon::now('America/Santiago');
 
         foreach ($raffles as $raffle) {
 
@@ -76,6 +76,54 @@ class RaffleController extends Controller
                 ['luck_winner_number' => $number_10]
             ]);
 
+
+            $raffle->user_id = $user->id;
+            $raffle->status_raffle = 2;
+            $raffle->entered_date = $entered_date;
+            $raffle->save();
+            $user->raffles_entered = $user->raffles_entered + 1;
+            $user->save();
+
+            $tickets = $raffle->tickets; // Obtener todos los tickets asociados al raffle
+
+            foreach ($tickets as $ticket) {
+                $numberMatches = 0;
+
+                // Comparar con winnerNumbers
+                $winnerNumbers = $raffle->winnerNumbers;
+
+                foreach ($winnerNumbers as $index => $winnerNumber) {
+                    $ticketNumber = $ticket->{'number_' . ($index + 1)};
+                    if ($ticketNumber == $winnerNumber->winner_number) {
+                        $numberMatches++;
+                    }
+                }
+
+                // Si todos los números coinciden con los de winnerNumbers, marcar como ganador
+                if ($numberMatches == 5) {
+                    $ticket->is_winner = true;
+                }
+
+                if ($ticket->luck){
+                    // Comparar con luckWinnerNumbers
+                    $luckWinnerNumbers = $raffle->luckWinnerNumbers;
+                    $numberMatches = 0; // Reiniciar el contador para luckWinnerNumbers
+                    foreach ($luckWinnerNumbers as $index => $luckWinnerNumber) {
+                        $ticketNumber = $ticket->{'number_' . ($index + 1)};
+                        if ($ticketNumber == $luckWinnerNumber->luck_winner_number) {
+                            $numberMatches++;
+                        }
+                    }
+
+                    // Si todos los números coinciden con los de luckWinnerNumbers, marcar como ganador de suerte
+                    if ($numberMatches == 5) {
+                        $ticket->is_luck_winner = true;
+                    }
+                }
+
+                // Guardar el ticket con las actualizaciones
+                $ticket->save();
+            }
         } else {
             $raffleNumbers = $request->input('raffle_numbers');
             // Separar los números por el separador ',' para obtener un array de números
@@ -94,15 +142,39 @@ class RaffleController extends Controller
                 ['winner_number' => $number_4],
                 ['winner_number' => $number_5]
             ]);
-        }
 
-        $raffle->user_id = $user->id;
-        $raffle->status_raffle = 2;
-        $raffle->entered_date = $entered_date;
-        $raffle->save();
-        $user->raffles_entered = $user->raffles_entered + 1;
-        $user->save();
+            $raffle->user_id = $user->id;
+            $raffle->status_raffle = 2;
+            $raffle->entered_date = $entered_date;
+            $raffle->save();
+            $user->raffles_entered = $user->raffles_entered + 1;
+            $user->save();
+
+            $tickets = $raffle->tickets; // Obtener todos los tickets asociados al raffle
+
+            foreach ($tickets as $ticket) {
+                $numberMatches = 0;
+
+                // Comparar con winnerNumbers
+                $winnerNumbers = $raffle->winnerNumbers;
+                foreach ($winnerNumbers as $index => $winnerNumber) {
+                    $ticketNumber = $ticket->{'number_' . ($index + 1)};
+                    if ($ticketNumber == $winnerNumber->winner_number) {
+                        $numberMatches++;
+                    }
+                }
+
+                // Si todos los números coinciden con los de winnerNumbers, marcar como ganador
+                if ($numberMatches == 5) {
+                    $ticket->is_winner = true;
+                }
+
+                $ticket->save();
+            }
+        }
 
         return redirect()->route('enterRaffle');
     }
 }
+
+

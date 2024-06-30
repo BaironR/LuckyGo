@@ -26,6 +26,12 @@ Route::get('/iniciar-sesion', [LoginController::class, 'loginForm'])->name('logi
 Route::post('/iniciar-sesion', [LoginController::class, 'login'])->name('login');
 Route::get('/cerrar-sesion', [LogoutController::class, 'logout'])->name('logout');
 
+// Revisar billete
+Route::get('/revisar-billete', [TicketController::class, 'viewTicket'])->name('viewTicket');
+
+Route::post('/revisar-billete', [TicketController::class, 'checkTicket'])->name('checkTicket');
+
+
 // Registro
 
 // Validar autenticación al ingresar url
