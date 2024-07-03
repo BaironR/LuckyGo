@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view(view: 'site.buyTickets');
 });
+Route::get('/', function () {
+    return view('welcome');
+});
+
 
 Route::post('/tickets', [TicketController::class, 'store']);
 
@@ -25,7 +29,8 @@ Route::post('/iniciar-sesion', [LoginController::class, 'login'])->name('login')
 Route::get('/cerrar-sesion', [LogoutController::class, 'logout'])->name('logout');
 
 // Registro
-
+Route::get('/register', [RegisterController::class, 'showRegistrationForm']);
+Route::post('/register', [RegisterController::class, 'registerCreate']);
 // Validar autenticación al ingresar url
 Route::middleware('auth')->group(callback: function(){
     Route::post('/registrar', [RegisterController::class, 'registerCreate'])->name('registerCreate');

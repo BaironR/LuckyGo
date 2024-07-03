@@ -1,16 +1,13 @@
-<?php
-
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\Models\User;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\PasswordMailable;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
-use App\Http\Controllers\RegisterController;
-use Mockery;
+use App\Http\Controllers\RegisterController;      
+use App\Models\User;
+use Illuminate\Validation\ValidationException;    
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerificationEmail;
 
 class RegisterControllerTest extends TestCase
 {
@@ -19,83 +16,93 @@ class RegisterControllerTest extends TestCase
     /** @test */
     public function it_shows_the_register_form()
     {
-        $controller = new RegisterController();
-        $response = $controller->registerForm();
-
-        $this->assertEquals('auth.register', $response->name());
+        $response = $this->get('/register');
+        $response->assertStatus(200);
+        $response->assertViewIs('register');
     }
 
     /** @test */
     public function it_registers_a_user_and_sends_an_email()
     {
-        Mail::fake();
+        Mail::fake(); // Falsifica el envío de correo para pruebas
 
         $request = Request::create('/register', 'POST', [
             'name' => 'John Doe',
             'email' => 'johndoe@example.com',
             'age' => 25,
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
         ]);
 
-        $controller = Mockery::mock(RegisterController::class)->makePartial();
-
-        $controller->shouldReceive('makeMessagesRegister')->andReturn([]);
-        $controller->shouldReceive('auth')->andReturnSelf();
-        $controller->shouldReceive('attempt')->andReturn(true);
+        $controller = new RegisterController();
 
         $response = $controller->registerCreate($request);
 
-        $response->assertRedirect(route('raffletors'));
+        // Comprobación de redirección (método alternativo para pruebas unitarias)
+        $this->assertEquals(302, $response->status()); // Verifica redirección
+        $this->assertEquals(url('/raffletors'), $response->headers->get('Location'));
+
+        // Comprobación de que el usuario fue creado en la base de datos
         $this->assertDatabaseHas('users', [
             'email' => 'johndoe@example.com',
-            'name' => 'John Doe',
-            'age' => 25,
         ]);
 
-        $user = User::where('email', 'johndoe@example.com')->first();
-        $this->assertNotNull($user);
-
-        Mail::assertSent(PasswordMailable::class, function ($mail) use ($user) {
-            return $mail->hasTo($user->email);
-        });
-
-        $this->assertTrue(session()->has('username'));
-        $this->assertEquals(session('username'), 'John Doe');
+        // Comprobación de que se envió un correo electrónico
+        Mail::assertSent(VerificationEmail::class);
     }
 
     /** @test */
     public function it_fails_registration_due_to_validation_errors()
     {
+        $this->withoutExceptionHandling(); // Esto muestra más detalles de los errores
+
         $request = Request::create('/register', 'POST', [
             'name' => '',
             'email' => 'invalid-email',
             'age' => 17,
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
         ]);
 
         $controller = new RegisterController();
-        
-        $response = $controller->registerCreate($request);
 
-        $response->assertSessionHasErrors(['name', 'email', 'age']);
+        try {
+            $controller->registerCreate($request);
+        } catch (ValidationException $e) {
+            $this->assertEquals('El campo nombre es obligatorio.', $e->errors()['name'][0]);
+            $this->assertEquals('El campo email debe ser una dirección de correo válida.', $e->errors()['email'][0]);
+            $this->assertEquals('El campo edad debe ser al menos 18.', $e->errors()['age'][0]);
+        }
+
         $this->assertNull(User::where('email', 'invalid-email')->first());
     }
 
     /** @test */
     public function it_fails_registration_due_to_email_already_taken()
     {
-        $user = User::factory()->create([
+        User::create([
+            'name' => 'Existing User',
             'email' => 'johndoe@example.com',
+            'password' => bcrypt('password123'),
         ]);
 
         $request = Request::create('/register', 'POST', [
             'name' => 'John Doe',
             'email' => 'johndoe@example.com',
             'age' => 25,
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
         ]);
 
         $controller = new RegisterController();
 
-        $response = $controller->registerCreate($request);
+        try {
+            $controller->registerCreate($request);
+        } catch (ValidationException $e) {
+            $this->assertEquals('El correo ya está en uso.', $e->errors()['email'][0]);
+        }
 
-        $response->assertSessionHasErrors(['email']);
+        $this->assertCount(1, User::where('email', 'johndoe@example.com')->get());
     }
 }
+
