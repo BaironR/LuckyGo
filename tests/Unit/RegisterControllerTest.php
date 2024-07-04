@@ -2,12 +2,13 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Http\Request;
-use App\Http\Controllers\RegisterController;      
+use App\Http\Controllers\RegisterController;
 use App\Models\User;
-use Illuminate\Validation\ValidationException;    
+use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\VerificationEmail;
+use App\Mail\PasswordMailable;
+use Exception;
 
 class RegisterControllerTest extends TestCase
 {
@@ -18,7 +19,11 @@ class RegisterControllerTest extends TestCase
     {
         $response = $this->get('/register');
         $response->assertStatus(200);
-        $response->assertViewIs('register');
+        $response->assertViewIs('auth.register');
+        $response->assertSee('Register'); // Verifica que el título de la página se vea
+        $response->assertSee('Name:'); // Verifica que el campo Name se vea
+        $response->assertSee('Email:'); // Verifica que el campo Email se vea
+        $response->assertSee('Age:'); // Verifica que el campo Age se vea
     }
 
     /** @test */
@@ -30,38 +35,31 @@ class RegisterControllerTest extends TestCase
             'name' => 'John Doe',
             'email' => 'johndoe@example.com',
             'age' => 25,
-            'password' => 'password123',
-            'password_confirmation' => 'password123',
         ]);
 
         $controller = new RegisterController();
 
         $response = $controller->registerCreate($request);
 
-        // Comprobación de redirección (método alternativo para pruebas unitarias)
         $this->assertEquals(302, $response->status()); // Verifica redirección
-        $this->assertEquals(url('/raffletors'), $response->headers->get('Location'));
+        $this->assertEquals(route('raffletors'), $response->headers->get('Location'));
 
-        // Comprobación de que el usuario fue creado en la base de datos
         $this->assertDatabaseHas('users', [
             'email' => 'johndoe@example.com',
         ]);
 
-        // Comprobación de que se envió un correo electrónico
-        Mail::assertSent(VerificationEmail::class);
+        Mail::assertSent(PasswordMailable::class);
     }
 
     /** @test */
     public function it_fails_registration_due_to_validation_errors()
     {
-        $this->withoutExceptionHandling(); // Esto muestra más detalles de los errores
+        $this->withoutExceptionHandling();
 
         $request = Request::create('/register', 'POST', [
             'name' => '',
             'email' => 'invalid-email',
             'age' => 17,
-            'password' => 'password123',
-            'password_confirmation' => 'password123',
         ]);
 
         $controller = new RegisterController();
@@ -69,9 +67,10 @@ class RegisterControllerTest extends TestCase
         try {
             $controller->registerCreate($request);
         } catch (ValidationException $e) {
-            $this->assertEquals('El campo nombre es obligatorio.', $e->errors()['name'][0]);
-            $this->assertEquals('El campo email debe ser una dirección de correo válida.', $e->errors()['email'][0]);
-            $this->assertEquals('El campo edad debe ser al menos 18.', $e->errors()['age'][0]);
+            $errors = $e->validator->errors();
+            $this->assertEquals('El campo nombre es obligatorio.', $errors->first('name'));
+            $this->assertEquals('El campo email debe ser una dirección de correo válida.', $errors->first('email'));
+            $this->assertEquals('El campo edad debe ser al menos 18.', $errors->first('age'));
         }
 
         $this->assertNull(User::where('email', 'invalid-email')->first());
@@ -90,8 +89,6 @@ class RegisterControllerTest extends TestCase
             'name' => 'John Doe',
             'email' => 'johndoe@example.com',
             'age' => 25,
-            'password' => 'password123',
-            'password_confirmation' => 'password123',
         ]);
 
         $controller = new RegisterController();
@@ -99,10 +96,10 @@ class RegisterControllerTest extends TestCase
         try {
             $controller->registerCreate($request);
         } catch (ValidationException $e) {
-            $this->assertEquals('El correo ya está en uso.', $e->errors()['email'][0]);
+            $errors = $e->validator->errors();
+            $this->assertEquals('El correo ya está en uso.', $errors->first('email'));
         }
 
         $this->assertCount(1, User::where('email', 'johndoe@example.com')->get());
     }
 }
-

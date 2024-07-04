@@ -29,6 +29,8 @@ Route::post('/iniciar-sesion', [LoginController::class, 'login'])->name('login')
 Route::get('/cerrar-sesion', [LogoutController::class, 'logout'])->name('logout');
 
 // Registro
+Route::get('/register', [RegisterController::class, 'registerForm'])->name('register.form');
+Route::post('/register', [RegisterController::class, 'registerCreate'])->name('register.create');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm']);
 Route::post('/register', [RegisterController::class, 'registerCreate']);
 // Validar autenticación al ingresar url
