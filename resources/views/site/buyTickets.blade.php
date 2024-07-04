@@ -6,7 +6,7 @@
         <a href="{{ route('viewTicket') }}" id="viewTicketButton">Revisar ticket</a>
         <div class="container mx-auto mt-10 p-5 bg-white rounded-lg shadow-lg max-w-md">
             <div class="mb-5 flex items-center justify-center">
-                <a href="https://imgbb.com/" class="flex items-center justify-center">
+                <a  class="flex items-center justify-center">
                     <img src="https://i.ibb.co/qBNsMDR/f653f8a2-5f7c-4959-82cf-17ac69e415c8.jpg" alt="LuckyGo" border="0" class="w-44" />
                 </a>
             </div>
@@ -28,7 +28,7 @@
             @enderror
 
             <div class="luck my-5">
-                <input type="checkbox" id="luck" name="luck" onchange="updateTotal()">
+                <input type="checkbox" id="luck" name="luck" title="Permite participar del sorteo adicional" onchange="updateTotal()">
                 <label for="luck" class="cursor-pointer">Tendré Suerte (+$1000)</label>
             </div>
             <div class="info bg-purple-100 p-2 rounded mb-5 text-sm">
@@ -37,7 +37,7 @@
             <div class="total text-lg mb-5">
                 Total: <span id="totalAmount">$2.000</span>
             </div>
-            <button class="play-button bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500" onclick="showModal()">Jugar</button>
+            <button class="play-button bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500" title="Vamos a jugar en lucky Go!" onclick="showModal()">Jugar</button>
         </div>
 
         <!-- The Modal -->
