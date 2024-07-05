@@ -18,7 +18,7 @@
             <div class="bg-red-500 text-white my-2 rounded-lg text-lg text-center p-2 w-1/3 mx-auto">No hay sorteadores en el sistema.</div>
         @else
 
-            <a href="{{ route('registerForm') }}" class="mb-4 inline-block w-28 py-4 px-8 bg-green-500 text-white rounded-xl text-center">Añadir</a>
+            <a href="{{ route('registerForm') }}" title="Registra un nuevo sorteador en el sistema" class="mb-4 inline-block w-28 py-4 px-8 bg-green-500 text-white rounded-xl text-center">Añadir</a>
             <div>
                 <table class="w-full text-md bg-white shadow-md rounded mb-4" id="sorteadoresTable">
                     <thead>
