@@ -13,9 +13,6 @@ use Illuminate\Validation\ValidationException;
 class UserController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $users = User::where('id', '!=', 1)->get();
