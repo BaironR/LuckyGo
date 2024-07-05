@@ -55,7 +55,7 @@
                         &nbsp;
                     @else
                         @foreach($ticket->raffle->winnerNumbers as $winnerNumber)
-                            {{$winnerNumber->winner_number . ' - '}}
+                            {{$winnerNumber->winner_number . '  '}}
                         @endforeach
                     @endif
                 </td>
