@@ -32,9 +32,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($users as $index => $user)
                         <tr>
-                            <td class="text-left p-3 px-5">{{ $user->id }}</td>
+                            <td class="text-left p-3 px-5">{{ $loop->iteration }}</td>
                             <td class="text-left p-3 px-5">{{ $user->name }}</td>
                             <td class="text-left p-3 px-5">{{ $user->email }}</td>
                             <td class="text-left p-3 px-5">{{ $user->age }}</td>
@@ -113,15 +113,31 @@
         function sortTable(columnIndex) {
             var table = document.getElementById('sorteadoresTable');
             var rows = Array.prototype.slice.call(table.getElementsByTagName('tr'), 1);
+
             rows.sort(function(a, b) {
                 var A = a.getElementsByTagName('td')[columnIndex].innerText.toLowerCase();
                 var B = b.getElementsByTagName('td')[columnIndex].innerText.toLowerCase();
                 return A.localeCompare(B, 'es', { sensitivity: 'base' });
             });
+
             for (var i = 0; i < rows.length; i++) {
+                rows[i].getElementsByTagName('td')[0].innerText = i + 1;  // Update ID column with incremental IDs
                 table.appendChild(rows[i]);
             }
         }
+
+        // Call sortTable(1) to sort by the Name column when the page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                var successMessage = document.getElementById('successMessage');
+                if (successMessage) {
+                    successMessage.style.display = 'none';
+                }
+            }, 3000); // 3000 milliseconds = 3 seconds
+
+            sortTable(1);  // Sort by Name column on page load
+        });
+
     </script>
 
 @endsection

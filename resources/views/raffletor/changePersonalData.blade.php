@@ -17,7 +17,7 @@
             @endif
             <form method="POST" action="{{ route('updateProfile') }}" onsubmit="return validateForm()">
                 @csrf
-                <input type="text" name="name" id="name" placeholder="Nombre" maxlength = "25" class="w-full p-3 mb-3 border border-gray-300 rounded-lg" value="{{ old('name', Auth::user()->name) }}">
+                <input type="text" name="name" id="name" placeholder="Nombre" maxlength = "255" class="w-full p-3 mb-3 border border-gray-300 rounded-lg" value="{{ old('name', Auth::user()->name) }}">
                 <input type="number" name="age" id="age" placeholder="Edad" class="w-full p-3 mb-3 border border-gray-300 rounded-lg" value="{{ old('age', Auth::user()->age) }}">
                 <div class="flex justify-between">
                     <button type="submit" class="w-2/5 text-white p-3 rounded-lg hover:bg-green-700" style="background-color: #2ECC71">Guardar Cambios</button>
