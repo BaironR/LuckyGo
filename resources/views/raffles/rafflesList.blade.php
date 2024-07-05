@@ -31,6 +31,7 @@
             font-size: 16px; /* Adjust font size to make the button smaller */
             cursor: pointer;
             border-radius: 5px; /* Optional: add some border radius for styling */
+            
         }
 
         .sidebar h2 {
@@ -76,7 +77,7 @@
         </ul>
     </div>
     <div class="main-content">
-        <button id="toggleSidebar" class="mt-2.5 ml-1">☰</button>
+        <button title="Opciones adicionales" id="toggleSidebar" class="mt-2.5 ml-1">☰</button>
     </div>
 
     <div class="lg:w-3/4 xl:w-2/3 mx-auto py-8 px-6 bg-white rounded-xl">

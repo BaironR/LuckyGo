@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="bg-green-200 text-center min-h-screen flex flex-col items-center">
-        <a href="{{ route('viewTicket') }}" id="viewTicketButton">Revisar ticket</a>
+        <a href="{{ route('viewTicket') }}" title="Chequea si ganaste un premio!" id="viewTicketButton">Revisar ticket</a>
         <div class="container mx-auto mt-10 p-5 bg-white rounded-lg shadow-lg max-w-md">
             <div class="mb-5 flex items-center justify-center">
                 <a  class="flex items-center justify-center">
